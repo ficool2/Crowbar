@@ -8,6 +8,7 @@
 	'Public rotationY As Byte
 	'Public rotationZ As Byte
 	Public position As SourceVector
-	Public rotation As SourceVector
+	'Public rotation As SourceVector
+	Public theRotation(2) As SourceFloat16bits
 
 End Class

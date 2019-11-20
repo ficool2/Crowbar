@@ -152,23 +152,45 @@ Public Class SourceSmdFile04
 			For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 				aBone = Me.theMdlFileData.theBones(boneIndex)
 
-				If aBone.parentBoneIndex = -1 Then
-					position.x = aSequence.thePositionsAndRotations(boneIndex).position.y
-					position.y = -aSequence.thePositionsAndRotations(boneIndex).position.x
-					position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
+				'If aBone.parentBoneIndex = -1 Then
+				'	position.x = aSequence.thePositionsAndRotations(boneIndex).position.y
+				'	position.y = -aSequence.thePositionsAndRotations(boneIndex).position.x
+				'	position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
 
-					rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
-					rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
-					rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z + MathModule.DegreesToRadians(-90)
-				Else
-					position.x = aSequence.thePositionsAndRotations(boneIndex).position.x
-					position.y = aSequence.thePositionsAndRotations(boneIndex).position.y
-					position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
+				'	rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
+				'	rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
+				'	rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z + MathModule.DegreesToRadians(-90)
+				'Else
+				'	position.x = aSequence.thePositionsAndRotations(boneIndex).position.x
+				'	position.y = aSequence.thePositionsAndRotations(boneIndex).position.y
+				'	position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
 
-					rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
-					rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
-					rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z
-				End If
+				'	rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
+				'	rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
+				'	rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z
+				'End If
+				'======
+				'If aBone.parentBoneIndex = -1 Then
+				'	position.x = aBone.position.y + aSequence.thePositionsAndRotations(boneIndex).position.y
+				'	position.y = -(aBone.position.x + aSequence.thePositionsAndRotations(boneIndex).position.x)
+				'	position.z = aBone.position.z + aSequence.thePositionsAndRotations(boneIndex).position.z
+				'Else
+				'	position.x = aBone.position.x + aSequence.thePositionsAndRotations(boneIndex).position.x
+				'	position.y = aBone.position.y + aSequence.thePositionsAndRotations(boneIndex).position.y
+				'	position.z = aBone.position.z + aSequence.thePositionsAndRotations(boneIndex).position.z
+				'End If
+
+				'rotation.x = 0
+				'rotation.y = 0
+				'rotation.z = 0
+				'======
+				position.x = aBone.position.x
+				position.y = aBone.position.y
+				position.z = aBone.position.z
+
+				rotation.x = aSequence.thePositionsAndRotations(boneIndex).theRotation(1).TheFloatValue
+				rotation.y = -aSequence.thePositionsAndRotations(boneIndex).theRotation(0).TheFloatValue
+				rotation.z = aSequence.thePositionsAndRotations(boneIndex).theRotation(2).TheFloatValue
 
 				line = "    "
 				line += boneIndex.ToString(TheApp.InternalNumberFormat)

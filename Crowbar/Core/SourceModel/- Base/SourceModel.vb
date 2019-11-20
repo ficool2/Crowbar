@@ -19,7 +19,7 @@ Public MustInherit Class SourceModel
 
 			If version = 4 Then
 				'NOT IMPLEMENTED YET.
-				'model = New SourceModel04(mdlPathFileName, version)
+				model = New SourceModel04(mdlPathFileName, version)
 			ElseIf version = 6 Then
 				model = New SourceModel06(mdlPathFileName, version)
 			ElseIf version = 10 Then

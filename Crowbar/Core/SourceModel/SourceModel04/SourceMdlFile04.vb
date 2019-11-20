@@ -278,18 +278,29 @@ Public Class SourceMdlFile04
 				For sequenceIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 					Dim aSequenceValue As New SourceMdlSequenceValue04()
 
-					aSequenceValue.position = New SourceVector()
-					aSequenceValue.rotation = New SourceVector()
-					aSequenceValue.position.x = Me.theInputFileReader.ReadByte()
-					aSequenceValue.position.y = Me.theInputFileReader.ReadByte()
-					aSequenceValue.position.z = Me.theInputFileReader.ReadByte()
-					aSequenceValue.rotation.X = Me.theInputFileReader.ReadByte()
-					aSequenceValue.rotation.Y = Me.theInputFileReader.ReadByte()
-					aSequenceValue.rotation.Z = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.position = New SourceVector()
+					'aSequenceValue.rotation = New SourceVector()
+					'aSequenceValue.position.x = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.position.y = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.position.z = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.rotation.X = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.rotation.Y = Me.theInputFileReader.ReadByte()
+					'aSequenceValue.rotation.Z = Me.theInputFileReader.ReadByte()
+					'======
 					'aSequenceValue.position = New SourceVector()
 					'aSequenceValue.position.x = Me.theInputFileReader.ReadSingle()
 					'aSequenceValue.position.y = Me.theInputFileReader.ReadSingle()
 					'aSequenceValue.position.z = Me.theInputFileReader.ReadSingle()
+					'======
+					'aSequenceValue.position = New SourceVector()
+					'aSequenceValue.position.x = Me.theInputFileReader.ReadInt16() / 65535
+					'aSequenceValue.position.y = Me.theInputFileReader.ReadInt16() / 65535
+					'aSequenceValue.position.z = Me.theInputFileReader.ReadInt16() / 65535
+					'======
+					For x As Integer = 0 To 2
+						aSequenceValue.theRotation(x) = New SourceFloat16bits()
+						aSequenceValue.theRotation(x).the16BitValue = Me.theInputFileReader.ReadUInt16()
+					Next
 
 					aSequence.thePositionsAndRotations.Add(aSequenceValue)
 				Next
