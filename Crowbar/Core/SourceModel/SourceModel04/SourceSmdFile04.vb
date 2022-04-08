@@ -131,9 +131,10 @@ Public Class SourceSmdFile04
 	Public Sub WriteSkeletonSectionForAnimation(ByVal aSequenceDesc As SourceMdlSequenceDesc04)
 		Dim line As String = ""
 		Dim aBone As SourceMdlBone04
-		Dim aSequence As SourceMdlSequence04
+		Dim aSequence As SourceMdlSequenceFrame04
 		Dim position As New SourceVector()
 		Dim rotation As New SourceVector()
+		'Dim tempValue As Double
 
 		'skeleton
 		line = "skeleton"
@@ -152,45 +153,41 @@ Public Class SourceSmdFile04
 			For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 				aBone = Me.theMdlFileData.theBones(boneIndex)
 
-				'If aBone.parentBoneIndex = -1 Then
-				'	position.x = aSequence.thePositionsAndRotations(boneIndex).position.y
-				'	position.y = -aSequence.thePositionsAndRotations(boneIndex).position.x
-				'	position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
+				If aBone.parentBoneIndex = -1 Then
+					position.x = aBone.position.x + aSequence.frame_root_motion.x
+					position.y = aBone.position.y + aSequence.frame_root_motion.y
+					position.z = aBone.position.z + aSequence.frame_root_motion.z
 
-				'	rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
-				'	rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
-				'	rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z + MathModule.DegreesToRadians(-90)
-				'Else
-				'	position.x = aSequence.thePositionsAndRotations(boneIndex).position.x
-				'	position.y = aSequence.thePositionsAndRotations(boneIndex).position.y
-				'	position.z = aSequence.thePositionsAndRotations(boneIndex).position.z
+					''NOTE: cos(90) = 0; sin(90) = 1
+					'tempValue = position.x
+					'position.x = position.y
+					'position.y = -tempValue
 
-				'	rotation.x = aSequence.thePositionsAndRotations(boneIndex).rotation.x
-				'	rotation.y = aSequence.thePositionsAndRotations(boneIndex).rotation.y
-				'	rotation.z = aSequence.thePositionsAndRotations(boneIndex).rotation.z
-				'End If
-				'======
-				'If aBone.parentBoneIndex = -1 Then
-				'	position.x = aBone.position.y + aSequence.thePositionsAndRotations(boneIndex).position.y
-				'	position.y = -(aBone.position.x + aSequence.thePositionsAndRotations(boneIndex).position.x)
-				'	position.z = aBone.position.z + aSequence.thePositionsAndRotations(boneIndex).position.z
-				'Else
-				'	position.x = aBone.position.x + aSequence.thePositionsAndRotations(boneIndex).position.x
-				'	position.y = aBone.position.y + aSequence.thePositionsAndRotations(boneIndex).position.y
-				'	position.z = aBone.position.z + aSequence.thePositionsAndRotations(boneIndex).position.z
-				'End If
+					'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
+					'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+					'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909 + MathModule.DegreesToRadians(-90)
+				Else
+					position.x = aBone.position.x
+					position.y = aBone.position.y
+					position.z = aBone.position.z
 
-				'rotation.x = 0
-				'rotation.y = 0
-				'rotation.z = 0
-				'======
-				position.x = aBone.position.x
-				position.y = aBone.position.y
-				position.z = aBone.position.z
+					'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
+					'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+					'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				End If
 
-				rotation.x = aSequence.thePositionsAndRotations(boneIndex).theRotation(1).TheFloatValue
-				rotation.y = -aSequence.thePositionsAndRotations(boneIndex).theRotation(0).TheFloatValue
-				rotation.z = aSequence.thePositionsAndRotations(boneIndex).theRotation(2).TheFloatValue
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
+				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909 + MathModule.DegreesToRadians(-90)
+				rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
+				rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
 
 				line = "    "
 				line += boneIndex.ToString(TheApp.InternalNumberFormat)
@@ -292,7 +289,10 @@ Public Class SourceSmdFile04
 	Private Function GetVertexLine(ByVal aBodyModel As SourceMdlModel04, ByVal aMesh As SourceMdlMesh04, ByVal aVertexInfo As SourceMdlFaceVertexInfo04) As String
 		Dim line As String
 		Dim boneIndex As Integer
-		Dim aBone As SourceMdlBone04
+		'Dim aBone As SourceMdlBone04
+		Dim vecin As New SourceVector
+		Dim rawPosition As SourceVector
+		Dim rawNormal As SourceVector
 		Dim position As New SourceVector
 		Dim normal As New SourceVector
 		Dim texCoordX As Double
@@ -301,31 +301,30 @@ Public Class SourceSmdFile04
 		line = ""
 		Try
 			boneIndex = aBodyModel.theVertexes(aVertexInfo.vertexIndex).boneIndex
-			aBone = Me.theMdlFileData.theBones(boneIndex)
+			'aBone = Me.theMdlFileData.theBones(boneIndex)
+			Dim boneTransform As SourceBoneTransform04
+			boneTransform = Me.theMdlFileData.theBoneTransforms(boneIndex)
 
 			'position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
 			'position.y = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
 			'position.z = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
-			position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
-			position.y = -aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
-			position.z = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
-			'position.x = aBone.position.x + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
-			'position.y = aBone.position.y + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
-			'position.z = aBone.position.z + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
-			'position.x = aBone.position.y + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
-			'position.y = -(aBone.position.x + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x)
-			'position.z = aBone.position.z + aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
+			MathModule.VectorCopy(aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector, vecin)
+			rawPosition = MathModule.VectorTransform(vecin, boneTransform.matrixColumn0, boneTransform.matrixColumn1, boneTransform.matrixColumn2, boneTransform.matrixColumn3)
 
-			'position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
-			'position.y = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
-			'position.z = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
-			'position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
-			'position.y = -(aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x)
-			'position.z = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
+			position.x = rawPosition.y
+			position.y = -rawPosition.x
+			position.z = rawPosition.z
 
-			normal.x = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.x
-			normal.y = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.y
-			normal.z = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.z
+			'normal.x = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.x
+			'normal.y = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.y
+			'normal.z = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.z
+			MathModule.VectorCopy(aBodyModel.theNormals(aVertexInfo.normalIndex).vector, vecin)
+			rawNormal = MathModule.VectorRotate(vecin, boneTransform.matrixColumn0, boneTransform.matrixColumn1, boneTransform.matrixColumn2, boneTransform.matrixColumn3)
+			MathModule.VectorNormalize(rawNormal)
+
+			normal.x = rawNormal.y
+			normal.y = -rawNormal.x
+			normal.z = rawNormal.z
 
 			If aBodyModel.theVertexes(aVertexInfo.vertexIndex).boneIndex <> aBodyModel.theNormals(aVertexInfo.normalIndex).index Then
 				Dim debug As Integer = 4242

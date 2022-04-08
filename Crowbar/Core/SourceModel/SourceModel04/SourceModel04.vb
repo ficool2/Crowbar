@@ -236,6 +236,7 @@ Public Class SourceModel04
 
 		' Post-processing.
 		'mdlFile.GetBoneDataFromFirstSequenceFirstFrame()
+		mdlFile.BuildBoneTransforms()
 	End Sub
 
 	Protected Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal aModel As SourceMdlModel04) As AppEnums.StatusMessage

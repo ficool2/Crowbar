@@ -1,7 +1,7 @@
 ﻿Public Class SourceMdlBodyPart04
 
 	Public name(31) As Char
-	Public unknown As Integer
+	Public flags As Integer
 	Public modelCount As Integer
 
 	Public theName As String

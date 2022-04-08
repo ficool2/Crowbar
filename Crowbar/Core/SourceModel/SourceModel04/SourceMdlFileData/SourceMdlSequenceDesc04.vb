@@ -6,6 +6,6 @@
 
 	Public theName As String
 	Public theSmdRelativePathFileName As String
-	Public theSequences As List(Of SourceMdlSequence04)
+	Public theSequences As List(Of SourceMdlSequenceFrame04)
 
 End Class

@@ -146,6 +146,8 @@
     </Compile>
     <Compile Include="Core\Packer\PackerInputInfo.vb" />
     <Compile Include="Core\Packer\PackerOutputInfo.vb" />
+    <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceBoneTransform04.vb" />
+    <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlSequenceFrame04.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFile14.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFileData\SourceMdlBodyPart14.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFileData\SourceMdlFileData14.vb" />
@@ -199,7 +201,6 @@
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlMesh04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlModel04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlNormal04.vb" />
-    <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlSequence04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlSequenceDesc04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlBone04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlFileData04.vb" />

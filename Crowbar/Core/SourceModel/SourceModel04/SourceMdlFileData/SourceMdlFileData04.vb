@@ -25,4 +25,6 @@ Public Class SourceMdlFileData04
 	Public theBones As List(Of SourceMdlBone04)
 	Public theSequenceDescs As List(Of SourceMdlSequenceDesc04)
 
+	Public theBoneTransforms As List(Of SourceBoneTransform04)
+
 End Class

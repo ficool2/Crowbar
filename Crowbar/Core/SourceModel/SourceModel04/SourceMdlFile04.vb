@@ -62,7 +62,7 @@ Public Class SourceMdlFile04
 					Dim aBone As New SourceMdlBone04()
 
 					aBone.parentBoneIndex = Me.theInputFileReader.ReadInt32()
-					aBone.unknown = Me.theInputFileReader.ReadInt32()
+					aBone.flags = Me.theInputFileReader.ReadInt32()
 					aBone.position.x = Me.theInputFileReader.ReadSingle()
 					aBone.position.y = Me.theInputFileReader.ReadSingle()
 					aBone.position.z = Me.theInputFileReader.ReadSingle()
@@ -143,7 +143,7 @@ Public Class SourceMdlFile04
 					Dim aSequenceDesc As SourceMdlSequenceDesc04
 					aSequenceDesc = Me.theMdlFileData.theSequenceDescs(sequenceDescIndex)
 
-					Me.ReadSequences(aSequenceDesc)
+					Me.ReadSequenceFrames(aSequenceDesc)
 				Next
 			Catch ex As Exception
 				Dim debug As Integer = 4242
@@ -171,7 +171,7 @@ Public Class SourceMdlFile04
 					aBodyPart.name = Me.theInputFileReader.ReadChars(aBodyPart.name.Length)
 					aBodyPart.theName = aBodyPart.name
 					aBodyPart.theName = StringClass.ConvertFromNullTerminatedOrFullLengthString(aBodyPart.theName)
-					aBodyPart.unknown = Me.theInputFileReader.ReadInt32()
+					aBodyPart.flags = Me.theInputFileReader.ReadInt32()
 					aBodyPart.modelCount = Me.theInputFileReader.ReadInt32()
 
 					Me.theMdlFileData.theBodyParts.Add(aBodyPart)
@@ -217,35 +217,77 @@ Public Class SourceMdlFile04
 		Me.theMdlFileData.theFileSeekLog.LogUnreadBytes(Me.theInputFileReader)
 	End Sub
 
+	Public Sub BuildBoneTransforms()
+		Me.theMdlFileData.theBoneTransforms = New List(Of SourceBoneTransform04)(Me.theMdlFileData.theBones.Count)
+		For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
+			Dim aBone As SourceMdlBone04
+			Dim boneTransform As New SourceBoneTransform04()
+			Dim parentBoneIndex As Integer
+
+			aBone = Me.theMdlFileData.theBones(boneIndex)
+
+			Dim boneMatrixColumn0 As New SourceVector()
+			Dim boneMatrixColumn1 As New SourceVector()
+			Dim boneMatrixColumn2 As New SourceVector()
+			Dim boneMatrixColumn3 As New SourceVector()
+			'MathModule.AngleMatrix(aBone.rotation.x, aBone.rotation.y, aBone.rotation.z, boneMatrixColumn0, boneMatrixColumn1, boneMatrixColumn2, boneMatrixColumn3)
+			'MathModule.AngleMatrix(aBone.rotation.z, aBone.rotation.x, aBone.rotation.y, boneMatrixColumn0, boneMatrixColumn1, boneMatrixColumn2, boneMatrixColumn3)
+			MathModule.AngleMatrix(0, 0, 0, boneMatrixColumn0, boneMatrixColumn1, boneMatrixColumn2, boneMatrixColumn3)
+
+			boneMatrixColumn3.x = aBone.position.x
+			boneMatrixColumn3.y = aBone.position.y
+			boneMatrixColumn3.z = aBone.position.z
+
+			parentBoneIndex = Me.theMdlFileData.theBones(boneIndex).parentBoneIndex
+			If parentBoneIndex = -1 Then
+				boneTransform.matrixColumn0.x = boneMatrixColumn0.x
+				boneTransform.matrixColumn0.y = boneMatrixColumn0.y
+				boneTransform.matrixColumn0.z = boneMatrixColumn0.z
+				boneTransform.matrixColumn1.x = boneMatrixColumn1.x
+				boneTransform.matrixColumn1.y = boneMatrixColumn1.y
+				boneTransform.matrixColumn1.z = boneMatrixColumn1.z
+				boneTransform.matrixColumn2.x = boneMatrixColumn2.x
+				boneTransform.matrixColumn2.y = boneMatrixColumn2.y
+				boneTransform.matrixColumn2.z = boneMatrixColumn2.z
+				boneTransform.matrixColumn3.x = boneMatrixColumn3.x
+				boneTransform.matrixColumn3.y = boneMatrixColumn3.y
+				boneTransform.matrixColumn3.z = boneMatrixColumn3.z
+			Else
+				Dim parentBoneTransform As SourceBoneTransform04
+				parentBoneTransform = Me.theMdlFileData.theBoneTransforms(parentBoneIndex)
+
+				'			R_ConcatTransforms( g_bonetransform[pbones[i].parent], bonematrix, g_bonetransform[i] );
+				MathModule.R_ConcatTransforms(parentBoneTransform.matrixColumn0, parentBoneTransform.matrixColumn1, parentBoneTransform.matrixColumn2, parentBoneTransform.matrixColumn3, boneMatrixColumn0, boneMatrixColumn1, boneMatrixColumn2, boneMatrixColumn3, boneTransform.matrixColumn0, boneTransform.matrixColumn1, boneTransform.matrixColumn2, boneTransform.matrixColumn3)
+			End If
+
+			Me.theMdlFileData.theBoneTransforms.Add(boneTransform)
+		Next
+	End Sub
+
 #End Region
 
 #Region "Private Methods"
 
-	Private Sub ReadSequences(ByVal aSequenceDesc As SourceMdlSequenceDesc04)
+	Private Sub ReadSequenceFrames(ByVal aSequenceDesc As SourceMdlSequenceDesc04)
 		If aSequenceDesc.frameCount > 0 Then
 			Dim fileOffsetStart As Long
 			Dim fileOffsetEnd As Long
 
 			Try
-				aSequenceDesc.theSequences = New List(Of SourceMdlSequence04)(aSequenceDesc.frameCount)
+				aSequenceDesc.theSequences = New List(Of SourceMdlSequenceFrame04)(aSequenceDesc.frameCount)
 				For sequenceIndex As Integer = 0 To aSequenceDesc.frameCount - 1
 					fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					Dim aSequence As New SourceMdlSequence04()
+					Dim aSequence As New SourceMdlSequenceFrame04()
 
-					aSequence.sequenceFrameIndexAsSingle = Me.theInputFileReader.ReadSingle()
+					aSequence.frameId = Me.theInputFileReader.ReadSingle()
 					For x As Integer = 0 To aSequence.unknown.Length - 1
 						aSequence.unknown(x) = Me.theInputFileReader.ReadInt32()
 					Next
-					aSequence.unknownSingle01 = Me.theInputFileReader.ReadSingle()
-					aSequence.unknownSingle02 = Me.theInputFileReader.ReadSingle()
-					aSequence.unknownSingle03 = Me.theInputFileReader.ReadSingle()
-					'aSequence.positionScaleX = Me.theInputFileReader.ReadInt16()
-					'aSequence.positionScaleY = Me.theInputFileReader.ReadInt16()
-					'aSequence.positionScaleZ = Me.theInputFileReader.ReadInt16()
-					'aSequence.rotationScaleX = Me.theInputFileReader.ReadInt16()
-					'aSequence.rotationScaleY = Me.theInputFileReader.ReadInt16()
-					'aSequence.rotationScaleZ = Me.theInputFileReader.ReadInt16()
+					aSequence.frame_root_motion = New SourceVector()
+					aSequence.frame_root_motion.x = Me.theInputFileReader.ReadSingle()
+					aSequence.frame_root_motion.y = Me.theInputFileReader.ReadSingle()
+					aSequence.frame_root_motion.z = Me.theInputFileReader.ReadSingle()
 
 					aSequenceDesc.theSequences.Add(aSequence)
 
@@ -266,7 +308,7 @@ Public Class SourceMdlFile04
 		End If
 	End Sub
 
-	Private Sub ReadSequenceValues(ByVal aSequence As SourceMdlSequence04)
+	Private Sub ReadSequenceValues(ByVal aSequence As SourceMdlSequenceFrame04)
 		If Me.theMdlFileData.theBones.Count > 0 Then
 			Dim fileOffsetStart As Long
 			Dim fileOffsetEnd As Long
@@ -274,39 +316,19 @@ Public Class SourceMdlFile04
 			Try
 				fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-				aSequence.thePositionsAndRotations = New List(Of SourceMdlSequenceValue04)(Me.theMdlFileData.theBones.Count)
+				aSequence.theSequenceValues = New List(Of SourceMdlSequenceValue04)(Me.theMdlFileData.theBones.Count)
 				For sequenceIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 					Dim aSequenceValue As New SourceMdlSequenceValue04()
 
-					'aSequenceValue.position = New SourceVector()
-					'aSequenceValue.rotation = New SourceVector()
-					'aSequenceValue.position.x = Me.theInputFileReader.ReadByte()
-					'aSequenceValue.position.y = Me.theInputFileReader.ReadByte()
-					'aSequenceValue.position.z = Me.theInputFileReader.ReadByte()
-					'aSequenceValue.rotation.X = Me.theInputFileReader.ReadByte()
-					'aSequenceValue.rotation.Y = Me.theInputFileReader.ReadByte()
-					'aSequenceValue.rotation.Z = Me.theInputFileReader.ReadByte()
-					'======
-					'aSequenceValue.position = New SourceVector()
-					'aSequenceValue.position.x = Me.theInputFileReader.ReadSingle()
-					'aSequenceValue.position.y = Me.theInputFileReader.ReadSingle()
-					'aSequenceValue.position.z = Me.theInputFileReader.ReadSingle()
-					'======
-					'aSequenceValue.position = New SourceVector()
-					'aSequenceValue.position.x = Me.theInputFileReader.ReadInt16() / 65535
-					'aSequenceValue.position.y = Me.theInputFileReader.ReadInt16() / 65535
-					'aSequenceValue.position.z = Me.theInputFileReader.ReadInt16() / 65535
-					'======
-					For x As Integer = 0 To 2
-						aSequenceValue.theRotation(x) = New SourceFloat16bits()
-						aSequenceValue.theRotation(x).the16BitValue = Me.theInputFileReader.ReadUInt16()
-					Next
+					aSequenceValue.rotationX = Me.theInputFileReader.ReadInt16()
+					aSequenceValue.rotationY = Me.theInputFileReader.ReadInt16()
+					aSequenceValue.rotationZ = Me.theInputFileReader.ReadInt16()
 
-					aSequence.thePositionsAndRotations.Add(aSequenceValue)
+					aSequence.theSequenceValues.Add(aSequenceValue)
 				Next
 
 				fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
-				Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence.thePositionsAndRotations " + aSequence.thePositionsAndRotations.Count.ToString())
+				Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence.theSequenceValues " + aSequence.theSequenceValues.Count.ToString())
 
 				'Me.theMdlFileData.theFileSeekLog.LogToEndAndAlignToNextStart(Me.theInputFileReader, fileOffsetEnd, 4, "theMdlFileData.theBones alignment")
 			Catch ex As Exception

@@ -1,7 +1,7 @@
 ﻿Public Class SourceMdlBone04
 
 	Public parentBoneIndex As Integer
-	Public unknown As Integer
+	Public flags As Integer
 	Public position As New SourceVector()
 	'Public positionX As Short
 	'Public positionY As Short
