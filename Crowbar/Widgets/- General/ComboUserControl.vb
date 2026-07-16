@@ -6,7 +6,7 @@ Imports System.Windows.Forms.VisualStyles
 
 Public Class ComboUserControl
 
-#Region "Creation and Destruction"
+#Region "Create and Destroy"
 
 	Public Sub New()
 
@@ -528,25 +528,35 @@ Public Class ComboUserControl
 			theme = TheApp.Settings.SelectedAppTheme.ComboUserControlTheme
 		End If
 		If theme IsNot Nothing Then
-			If Me.theMouseIsOverWidget Then
-				Me.theBorderColor = theme.FocusBorderColor
-			ElseIf Me.Enabled Then
-				Me.theBorderColor = theme.EnabledBorderColor
+			Dim borderColor As Color
+			Dim borderWidth As Integer
+			If Me.Enabled Then
+				If Me.theMouseIsOverWidget Then
+					borderColor = theme.FocusBorderColor
+					borderWidth = theme.FocusBorderWidth
+				Else
+					borderColor = theme.EnabledBorderColor
+					borderWidth = theme.EnabledBorderWidth
+				End If
 			Else
-				Me.theBorderColor = theme.DisabledBorderColor
+				borderColor = theme.DisabledBorderColor
+				borderWidth = theme.DisabledBorderWidth
 			End If
 
 			Dim hDC As IntPtr = Win32Api.GetWindowDC(Me.Handle)
 			Try
 				Using g As Graphics = Graphics.FromHdc(hDC)
-					Dim aRect As RectangleF = g.VisibleClipBounds
 					' Draw border.
-					If Me.theBorderStyle = BorderStyle.FixedSingle Then
-						Using borderColorPen As New Pen(Me.theBorderColor)
-							'NOTE: DrawRectangle width and height are interpreted as the right and bottom pixels to draw.
-							g.DrawRectangle(borderColorPen, aRect.Left, aRect.Top, aRect.Width - 1, aRect.Height - 1)
-						End Using
-					End If
+					Using borderColorPen As New Pen(borderColor, borderWidth)
+						borderColorPen.Alignment = Drawing2D.PenAlignment.Inset
+						Dim aRect As Rectangle = Rectangle.Truncate(g.VisibleClipBounds)
+						If borderWidth = 1 Then
+							'NOTE: DrawRectangle width and height are interpreted as the right and bottom pixels to draw when pen width is 1.
+							aRect.Width -= 1
+							aRect.Height -= 1
+						End If
+						g.DrawRectangle(borderColorPen, aRect)
+					End Using
 				End Using
 			Finally
 				Win32Api.ReleaseDC(Me.Handle, hDC)
@@ -818,11 +828,44 @@ Public Class ComboUserControl
 	End Sub
 
 	Private Sub UpdateNonClientPadding()
-		If Me.theBorderStyle = BorderStyle.FixedSingle Then
-			Me.NonClientPadding = New Padding(1)
-		Else
-			Me.NonClientPadding = New Padding(0)
+		If Me.DesignMode Then
+			Exit Sub
 		End If
+
+		Dim left As Integer = 0
+		Dim top As Integer = 0
+		Dim right As Integer = 0
+		Dim bottom As Integer = 0
+
+		Dim theme As ComboUserControlTheme = Nothing
+		If TheApp IsNot Nothing Then
+			theme = TheApp.Settings.SelectedAppTheme.ComboUserControlTheme
+		End If
+		If theme IsNot Nothing Then
+			Dim borderWidth As Integer
+			If Me.Enabled Then
+				If Me.theMouseIsOverWidget Then
+					borderWidth = theme.FocusBorderWidth
+				Else
+					borderWidth = theme.EnabledBorderWidth
+				End If
+			Else
+				borderWidth = theme.DisabledBorderWidth
+			End If
+			left += borderWidth
+			top += borderWidth
+			right += borderWidth
+			bottom += borderWidth
+		Else
+			If Me.theBorderStyle = BorderStyle.FixedSingle Then
+				left = 1
+				top = 1
+				right = 1
+				bottom = 1
+			End If
+		End If
+
+		Me.NonClientPadding = New Padding(left, top, right, bottom)
 	End Sub
 
 	Private Sub ResizeClientRect(ByVal padding As Padding, ByRef rect As Win32Api.RECT)
@@ -979,8 +1022,8 @@ Public Class ComboUserControl
 			'Me.TextHistoryPopup.Height = Me.TextHistoryDataGridView.Rows.GetRowsHeight(DataGridViewElementStates.Visible)
 			'Me.TextHistoryPopup.Size = Me.Size
 
-			' Use -1 for X to account for left border.
-			Dim position As New Point(-1, Me.Height)
+			' Adjust the X-coord to account for width of left border.
+			Dim position As New Point(-Me.NonClientPadding.Left, Me.Height)
 			position = Me.PointToScreen(position)
 			Me.TextHistoryPopup.Show(position)
 			Me.TextHistoryDataGridView.Show()
@@ -1151,7 +1194,6 @@ Public Class ComboUserControl
 #Region "Data"
 
 	Private NonClientPadding As Padding
-	Private theBorderColor As Color
 	Private theBorderStyle As BorderStyle
 	Protected theControlIsReadOnly As Boolean
 	Protected theComboPanelBorderColor As Color

@@ -8,29 +8,26 @@ Public Class CheckBoxTheme
     Public Sub New()
         MyBase.New()
 
-        Me.theUntickedEnabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theUntickedEnabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theUntickedEnabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theUntickedBoxEnabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theUntickedBoxEnabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
-        Me.theUntickedDisabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theUntickedDisabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theUntickedDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theUntickedBoxDisabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theUntickedBoxDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
-        Me.theUntickedFocusForeColor = New XmlColor("WindowColorizationColor")
-        Me.theUntickedFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theUntickedFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theUntickedBoxFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theUntickedBoxFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
-        Me.theTickedEnabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theTickedEnabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theTickedEnabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theTickedBoxEnabledCheckmarkColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theTickedBoxEnabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theTickedBoxEnabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
-        Me.theTickedDisabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theTickedDisabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theTickedDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theTickedBoxDisabledCheckmarkColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theTickedBoxDisabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theTickedBoxDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
-        Me.theTickedFocusForeColor = New XmlColor("WindowColorizationColor")
-        Me.theTickedFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-        Me.theTickedFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theTickedBoxFocusCheckmarkColor = New XmlColor("WindowColorizationColor")
+        Me.theTickedBoxFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
+        Me.theTickedBoxFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
 
     End Sub
 
@@ -48,165 +45,138 @@ Public Class CheckBoxTheme
 
 #Region "Properties"
 
-    Public Property UntickedEnabledForeColor As XmlColor
+    Public Property UntickedBoxEnabledBackColor As XmlColor
         Get
-            Return Me.theUntickedEnabledForeColor
+            Return Me.theUntickedBoxEnabledBackColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedEnabledForeColor = value
+            Me.theUntickedBoxEnabledBackColor = value
         End Set
     End Property
 
-    Public Property UntickedEnabledBackColor As XmlColor
+    Public Property UntickedBoxEnabledBorderColor As XmlColor
         Get
-            Return Me.theUntickedEnabledBackColor
+            Return Me.theUntickedBoxEnabledBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedEnabledBackColor = value
+            Me.theUntickedBoxEnabledBorderColor = value
         End Set
     End Property
 
-    Public Property UntickedEnabledBorderColor As XmlColor
+    Public Property UntickedBoxDisabledBackColor As XmlColor
         Get
-            Return Me.theUntickedEnabledBorderColor
+            Return Me.theUntickedBoxDisabledBackColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedEnabledBorderColor = value
+            Me.theUntickedBoxDisabledBackColor = value
         End Set
     End Property
 
-    Public Property UntickedDisabledForeColor As XmlColor
+    Public Property UntickedBoxDisabledBorderColor As XmlColor
         Get
-            Return Me.theUntickedDisabledForeColor
+            Return Me.theUntickedBoxDisabledBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedDisabledForeColor = value
+            Me.theUntickedBoxDisabledBorderColor = value
         End Set
     End Property
 
-    Public Property UntickedDisabledBackColor As XmlColor
+    Public Property UntickedBoxFocusBackColor As XmlColor
         Get
-            Return Me.theUntickedDisabledBackColor
+            Return Me.theUntickedBoxFocusBackColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedDisabledBackColor = value
+            Me.theUntickedBoxFocusBackColor = value
         End Set
     End Property
 
-    Public Property UntickedDisabledBorderColor As XmlColor
+    Public Property UntickedBoxFocusBorderColor As XmlColor
         Get
-            Return Me.theUntickedDisabledBorderColor
+            Return Me.theUntickedBoxFocusBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedDisabledBorderColor = value
+            Me.theUntickedBoxFocusBorderColor = value
         End Set
     End Property
 
-    Public Property UntickedFocusForeColor As XmlColor
+    Public Property TickedBoxEnabledCheckmarkColor As XmlColor
         Get
-            Return Me.theUntickedFocusForeColor
+            Return Me.theTickedBoxEnabledCheckmarkColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedFocusForeColor = value
+            Me.theTickedBoxEnabledCheckmarkColor = value
         End Set
     End Property
 
-    Public Property UntickedFocusBackColor As XmlColor
+    Public Property TickedBoxEnabledBackColor As XmlColor
         Get
-            Return Me.theUntickedFocusBackColor
+            Return Me.theTickedBoxEnabledBackColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedFocusBackColor = value
+            Me.theTickedBoxEnabledBackColor = value
         End Set
     End Property
 
-    Public Property UntickedFocusBorderColor As XmlColor
+    Public Property TickedBoxEnabledBorderColor As XmlColor
         Get
-            Return Me.theUntickedFocusBorderColor
+            Return Me.theTickedBoxEnabledBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theUntickedFocusBorderColor = value
+            Me.theTickedBoxEnabledBorderColor = value
         End Set
     End Property
 
-    Public Property TickedEnabledForeColor As XmlColor
+    Public Property TickedBoxDisabledCheckmarkColor As XmlColor
         Get
-            Return Me.theTickedEnabledForeColor
+            Return Me.theTickedBoxDisabledCheckmarkColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedEnabledForeColor = value
+            Me.theTickedBoxDisabledCheckmarkColor = value
         End Set
     End Property
 
-    Public Property TickedEnabledBackColor As XmlColor
+    Public Property TickedBoxDisabledBackColor As XmlColor
         Get
-            Return Me.theTickedEnabledBackColor
+            Return Me.theTickedBoxDisabledBackColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedEnabledBackColor = value
+            Me.theTickedBoxDisabledBackColor = value
         End Set
     End Property
 
-    Public Property TickedEnabledBorderColor As XmlColor
+    Public Property TickedBoxDisabledBorderColor As XmlColor
         Get
-            Return Me.theTickedEnabledBorderColor
+            Return Me.theTickedBoxDisabledBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedEnabledBorderColor = value
+            Me.theTickedBoxDisabledBorderColor = value
         End Set
     End Property
 
-    Public Property TickedDisabledForeColor As XmlColor
+    Public Property TickedBoxFocusCheckmarkColor As XmlColor
         Get
-            Return Me.theTickedDisabledForeColor
+            Return Me.theTickedBoxFocusCheckmarkColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedDisabledForeColor = value
+            Me.theTickedBoxFocusCheckmarkColor = value
         End Set
     End Property
 
-    Public Property TickedDisabledBackColor As XmlColor
+    Public Property TickedBoxFocusBackColor As XmlColor
         Get
-            Return Me.theTickedDisabledBackColor
+            Return Me.theTickedBoxFocusBackColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedDisabledBackColor = value
+            Me.theTickedBoxFocusBackColor = value
         End Set
     End Property
 
-    Public Property TickedDisabledBorderColor As XmlColor
+    Public Property TickedBoxFocusBorderColor As XmlColor
         Get
-            Return Me.theTickedDisabledBorderColor
+            Return Me.theTickedBoxFocusBorderColor
         End Get
         Set(value As XmlColor)
-            Me.theTickedDisabledBorderColor = value
-        End Set
-    End Property
-
-    Public Property TickedFocusForeColor As XmlColor
-        Get
-            Return Me.theTickedFocusForeColor
-        End Get
-        Set(value As XmlColor)
-            Me.theTickedFocusForeColor = value
-        End Set
-    End Property
-
-    Public Property TickedFocusBackColor As XmlColor
-        Get
-            Return Me.theTickedFocusBackColor
-        End Get
-        Set(value As XmlColor)
-            Me.theTickedFocusBackColor = value
-        End Set
-    End Property
-
-    Public Property TickedFocusBorderColor As XmlColor
-        Get
-            Return Me.theTickedFocusBorderColor
-        End Get
-        Set(value As XmlColor)
-            Me.theTickedFocusBorderColor = value
+            Me.theTickedBoxFocusBorderColor = value
         End Set
     End Property
 
@@ -226,29 +196,26 @@ Public Class CheckBoxTheme
 
 #Region "Data"
 
-    Private theUntickedEnabledForeColor As XmlColor
-    Private theUntickedEnabledBackColor As XmlColor
-    Private theUntickedEnabledBorderColor As XmlColor
+    Private theUntickedBoxEnabledBackColor As XmlColor
+    Private theUntickedBoxEnabledBorderColor As XmlColor
 
-    Private theUntickedDisabledForeColor As XmlColor
-    Private theUntickedDisabledBackColor As XmlColor
-    Private theUntickedDisabledBorderColor As XmlColor
+    Private theUntickedBoxDisabledBackColor As XmlColor
+    Private theUntickedBoxDisabledBorderColor As XmlColor
 
-    Private theUntickedFocusForeColor As XmlColor
-    Private theUntickedFocusBackColor As XmlColor
-    Private theUntickedFocusBorderColor As XmlColor
+    Private theUntickedBoxFocusBackColor As XmlColor
+    Private theUntickedBoxFocusBorderColor As XmlColor
 
-    Private theTickedEnabledForeColor As XmlColor
-    Private theTickedEnabledBackColor As XmlColor
-    Private theTickedEnabledBorderColor As XmlColor
+    Private theTickedBoxEnabledCheckmarkColor As XmlColor
+    Private theTickedBoxEnabledBackColor As XmlColor
+    Private theTickedBoxEnabledBorderColor As XmlColor
 
-    Private theTickedDisabledForeColor As XmlColor
-    Private theTickedDisabledBackColor As XmlColor
-    Private theTickedDisabledBorderColor As XmlColor
+    Private theTickedBoxDisabledCheckmarkColor As XmlColor
+    Private theTickedBoxDisabledBackColor As XmlColor
+    Private theTickedBoxDisabledBorderColor As XmlColor
 
-    Private theTickedFocusForeColor As XmlColor
-    Private theTickedFocusBackColor As XmlColor
-    Private theTickedFocusBorderColor As XmlColor
+    Private theTickedBoxFocusCheckmarkColor As XmlColor
+    Private theTickedBoxFocusBackColor As XmlColor
+    Private theTickedBoxFocusBorderColor As XmlColor
 
 #End Region
 

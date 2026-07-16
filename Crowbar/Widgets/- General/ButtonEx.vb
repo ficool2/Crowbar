@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing.Drawing2D
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.VisualStyles
 
@@ -172,7 +173,7 @@ Public Class ButtonEx
 			Dim clientRectangle As Rectangle = Me.ClientRectangle
 
 			' Draw background.
-			Using aColorBrush As New Drawing2D.LinearGradientBrush(clientRectangle, backColor1, backColor2, Drawing2D.LinearGradientMode.Vertical)
+			Using aColorBrush As New LinearGradientBrush(clientRectangle, backColor1, backColor2, LinearGradientMode.Vertical)
 				g.FillRectangle(aColorBrush, clientRectangle)
 			End Using
 			'' Draw border.
@@ -268,9 +269,11 @@ Public Class ButtonEx
 					Using borderColorPen As New Pen(borderColor, borderWidth)
 						borderColorPen.Alignment = Drawing2D.PenAlignment.Inset
 						Dim aRect As Rectangle = Rectangle.Truncate(g.VisibleClipBounds)
-						''NOTE: DrawRectangle width and height are interpreted as the right and bottom pixels to draw.
-						aRect.Width -= 1
-						aRect.Height += 1
+						If borderWidth = 1 Then
+							'NOTE: DrawRectangle width and height are interpreted as the right and bottom pixels to draw when pen width is 1.
+							aRect.Width -= 1
+							aRect.Height -= 1
+						End If
 						g.DrawRectangle(borderColorPen, aRect)
 					End Using
 				End Using
@@ -349,7 +352,6 @@ Public Class ButtonEx
 	Private Sub ResizeClientRect(ByVal padding As Padding, ByRef rect As Win32Api.RECT)
 		rect.Left += padding.Left
 		rect.Top += padding.Top
-
 		rect.Right -= padding.Right
 		rect.Bottom -= padding.Bottom
 	End Sub
