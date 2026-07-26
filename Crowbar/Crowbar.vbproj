@@ -109,6 +109,7 @@
     <Compile Include="Core\- AppThemes\GroupBoxTheme.vb" />
     <Compile Include="Core\- AppThemes\DataGridViewTheme.vb" />
     <Compile Include="Core\- AppThemes\ComboUserControlTheme.vb" />
+    <Compile Include="Core\- AppThemes\SelectableBorderWidgetTheme.vb" />
     <Compile Include="Core\- AppThemes\SplitContainerTheme.vb" />
     <Compile Include="Core\- AppThemes\RadioButtonTheme.vb" />
     <Compile Include="Core\- AppThemes\ToolStripTheme.vb" />
@@ -121,6 +122,7 @@
     <Compile Include="Core\- AppThemes\CheckBoxTheme.vb" />
     <Compile Include="Core\- AppThemes\ThemeData.vb" />
     <Compile Include="Core\- AppThemes\GlobalTheme.vb" />
+    <Compile Include="Core\- AppThemes\SelectableWidgetTheme.vb" />
     <Compile Include="Core\- AppThemes\WidgetTheme.vb" />
     <Compile Include="Core\- Application\VersionModule.vb" />
     <Compile Include="Core\- General\BackgroundWorkerEx.vb">

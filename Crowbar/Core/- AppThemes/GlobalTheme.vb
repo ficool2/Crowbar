@@ -18,15 +18,15 @@ Public Class GlobalTheme
         Me.theHighDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theHighDisabledBorderWidth = 1
 
-        Me.theHighSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theHighSelectedBackColor = New XmlColor("WindowColorizationColor")
-        Me.theHighSelectedBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theHighSelectedBorderWidth = 1
-
         Me.theHighFocusForeColor = New XmlColor("WindowColorizationColor")
         Me.theHighFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
         Me.theHighFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theHighFocusBorderWidth = 1
+
+        Me.theHighSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theHighSelectedBackColor = New XmlColor("WindowColorizationColor")
+        Me.theHighSelectedBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theHighSelectedBorderWidth = 1
 
         Me.theDeepEnabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theDeepEnabledBackColor = New XmlColor(Color.FromArgb(&HFF1E1E1E))
@@ -38,15 +38,15 @@ Public Class GlobalTheme
         Me.theDeepDisabledBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theDeepDisabledBorderWidth = 1
 
-        Me.theDeepSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theDeepSelectedBackColor = New XmlColor("WindowColorizationColor")
-        Me.theDeepSelectedBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theDeepSelectedBorderWidth = 1
-
         Me.theDeepFocusForeColor = New XmlColor("WindowColorizationColor")
         Me.theDeepFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
         Me.theDeepFocusBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theDeepFocusBorderWidth = 1
+
+        Me.theDeepSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theDeepSelectedBackColor = New XmlColor("WindowColorizationColor")
+        Me.theDeepSelectedBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
+        Me.theDeepSelectedBorderWidth = 1
     End Sub
 
 #End Region
@@ -135,42 +135,6 @@ Public Class GlobalTheme
         End Set
     End Property
 
-    Public Property HighSelectedForeColor As XmlColor
-        Get
-            Return Me.theHighSelectedForeColor
-        End Get
-        Set(value As XmlColor)
-            Me.theHighSelectedForeColor = value
-        End Set
-    End Property
-
-    Public Property HighSelectedBackColor As XmlColor
-        Get
-            Return Me.theHighSelectedBackColor
-        End Get
-        Set(value As XmlColor)
-            Me.theHighSelectedBackColor = value
-        End Set
-    End Property
-
-    Public Property HighSelectedBorderColor As XmlColor
-        Get
-            Return Me.theHighSelectedBorderColor
-        End Get
-        Set(value As XmlColor)
-            Me.theHighSelectedBorderColor = value
-        End Set
-    End Property
-
-    Public Property HighSelectedBorderWidth As Integer
-        Get
-            Return Me.theHighSelectedBorderWidth
-        End Get
-        Set(value As Integer)
-            Me.theHighSelectedBorderWidth = value
-        End Set
-    End Property
-
     Public Property HighFocusForeColor As XmlColor
         Get
             Return Me.theHighFocusForeColor
@@ -204,6 +168,42 @@ Public Class GlobalTheme
         End Get
         Set(value As Integer)
             Me.theHighFocusBorderWidth = value
+        End Set
+    End Property
+
+    Public Property HighSelectedForeColor As XmlColor
+        Get
+            Return Me.theHighSelectedForeColor
+        End Get
+        Set(value As XmlColor)
+            Me.theHighSelectedForeColor = value
+        End Set
+    End Property
+
+    Public Property HighSelectedBackColor As XmlColor
+        Get
+            Return Me.theHighSelectedBackColor
+        End Get
+        Set(value As XmlColor)
+            Me.theHighSelectedBackColor = value
+        End Set
+    End Property
+
+    Public Property HighSelectedBorderColor As XmlColor
+        Get
+            Return Me.theHighSelectedBorderColor
+        End Get
+        Set(value As XmlColor)
+            Me.theHighSelectedBorderColor = value
+        End Set
+    End Property
+
+    Public Property HighSelectedBorderWidth As Integer
+        Get
+            Return Me.theHighSelectedBorderWidth
+        End Get
+        Set(value As Integer)
+            Me.theHighSelectedBorderWidth = value
         End Set
     End Property
 
@@ -279,42 +279,6 @@ Public Class GlobalTheme
         End Set
     End Property
 
-    Public Property DeepSelectedForeColor As XmlColor
-        Get
-            Return Me.theDeepSelectedForeColor
-        End Get
-        Set(value As XmlColor)
-            Me.theDeepSelectedForeColor = value
-        End Set
-    End Property
-
-    Public Property DeepSelectedBackColor As XmlColor
-        Get
-            Return Me.theDeepSelectedBackColor
-        End Get
-        Set(value As XmlColor)
-            Me.theDeepSelectedBackColor = value
-        End Set
-    End Property
-
-    Public Property DeepSelectedBorderColor As XmlColor
-        Get
-            Return Me.theDeepSelectedBorderColor
-        End Get
-        Set(value As XmlColor)
-            Me.theDeepSelectedBorderColor = value
-        End Set
-    End Property
-
-    Public Property DeepSelectedBorderWidth As Integer
-        Get
-            Return Me.theDeepSelectedBorderWidth
-        End Get
-        Set(value As Integer)
-            Me.theDeepSelectedBorderWidth = value
-        End Set
-    End Property
-
     Public Property DeepFocusForeColor As XmlColor
         Get
             Return Me.theDeepFocusForeColor
@@ -351,6 +315,42 @@ Public Class GlobalTheme
         End Set
     End Property
 
+    Public Property DeepSelectedForeColor As XmlColor
+        Get
+            Return Me.theDeepSelectedForeColor
+        End Get
+        Set(value As XmlColor)
+            Me.theDeepSelectedForeColor = value
+        End Set
+    End Property
+
+    Public Property DeepSelectedBackColor As XmlColor
+        Get
+            Return Me.theDeepSelectedBackColor
+        End Get
+        Set(value As XmlColor)
+            Me.theDeepSelectedBackColor = value
+        End Set
+    End Property
+
+    Public Property DeepSelectedBorderColor As XmlColor
+        Get
+            Return Me.theDeepSelectedBorderColor
+        End Get
+        Set(value As XmlColor)
+            Me.theDeepSelectedBorderColor = value
+        End Set
+    End Property
+
+    Public Property DeepSelectedBorderWidth As Integer
+        Get
+            Return Me.theDeepSelectedBorderWidth
+        End Get
+        Set(value As Integer)
+            Me.theDeepSelectedBorderWidth = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Methods"
@@ -378,15 +378,15 @@ Public Class GlobalTheme
     Protected theHighDisabledBorderColor As XmlColor
     Protected theHighDisabledBorderWidth As Integer
 
-    Protected theHighSelectedForeColor As XmlColor
-    Protected theHighSelectedBackColor As XmlColor
-    Protected theHighSelectedBorderColor As XmlColor
-    Protected theHighSelectedBorderWidth As Integer
-
     Protected theHighFocusForeColor As XmlColor
     Protected theHighFocusBackColor As XmlColor
     Protected theHighFocusBorderColor As XmlColor
     Protected theHighFocusBorderWidth As Integer
+
+    Protected theHighSelectedForeColor As XmlColor
+    Protected theHighSelectedBackColor As XmlColor
+    Protected theHighSelectedBorderColor As XmlColor
+    Protected theHighSelectedBorderWidth As Integer
 
     Protected theDeepEnabledForeColor As XmlColor
     Protected theDeepEnabledBackColor As XmlColor
@@ -398,15 +398,15 @@ Public Class GlobalTheme
     Protected theDeepDisabledBorderColor As XmlColor
     Protected theDeepDisabledBorderWidth As Integer
 
-    Protected theDeepSelectedForeColor As XmlColor
-    Protected theDeepSelectedBackColor As XmlColor
-    Protected theDeepSelectedBorderColor As XmlColor
-    Protected theDeepSelectedBorderWidth As Integer
-
     Protected theDeepFocusForeColor As XmlColor
     Protected theDeepFocusBackColor As XmlColor
     Protected theDeepFocusBorderColor As XmlColor
     Protected theDeepFocusBorderWidth As Integer
+
+    Protected theDeepSelectedForeColor As XmlColor
+    Protected theDeepSelectedBackColor As XmlColor
+    Protected theDeepSelectedBorderColor As XmlColor
+    Protected theDeepSelectedBorderWidth As Integer
 
 #End Region
 

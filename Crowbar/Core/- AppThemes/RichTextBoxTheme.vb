@@ -1,7 +1,7 @@
 ﻿Imports System.Xml.Serialization
 
 Public Class RichTextBoxTheme
-    Inherits WidgetTheme
+    Inherits SelectableWidgetTheme
 
 #Region "Create and Destroy"
 

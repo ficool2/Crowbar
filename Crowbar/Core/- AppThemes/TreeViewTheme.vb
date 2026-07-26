@@ -1,7 +1,7 @@
 ﻿Imports System.Xml.Serialization
 
 Public Class TreeViewTheme
-    Inherits WidgetTheme
+    Inherits SelectableWidgetTheme
 
 #Region "Create and Destroy"
 

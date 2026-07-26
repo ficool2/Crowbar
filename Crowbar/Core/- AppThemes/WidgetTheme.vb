@@ -17,29 +17,12 @@ Public Class WidgetTheme
         Me.theDisabledBorderColor = New XmlColor(Color.FromArgb(&HFF454545))
         Me.theDisabledBorderWidth = 1
 
-        Me.theSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theSelectedBackColor = New XmlColor("WindowColorizationColor")
-        Me.theSelectedBorderColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        Me.theSelectedBorderWidth = 1
-
         Me.theFocusForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
         Me.theFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
         'Me.theFocusTopBackColor = New XmlColor("WindowColorizationColor")
         'Me.theFocusBottomBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
         Me.theFocusBorderColor = New XmlColor("WindowColorizationColor")
         Me.theFocusBorderWidth = 1
-
-        'Me.theTextEnabledForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        'Me.theTextEnabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-
-        'Me.theTextDisabledForeColor = New XmlColor(Color.FromArgb(&HFF808080))
-        'Me.theTextDisabledBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-
-        'Me.theTextFocusForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        'Me.theTextFocusBackColor = New XmlColor(Color.FromArgb(&HFF4B4B4B))
-
-        'Me.theTextSelectedForeColor = New XmlColor(Color.FromArgb(&HFFF1F1F1))
-        'Me.theTextSelectedBackColor = New XmlColor("WindowColorizationColor")
     End Sub
 
 #End Region
@@ -128,42 +111,6 @@ Public Class WidgetTheme
         End Set
     End Property
 
-    Public Property SelectedForeColor As XmlColor
-        Get
-            Return Me.theSelectedForeColor
-        End Get
-        Set(value As XmlColor)
-            Me.theSelectedForeColor = value
-        End Set
-    End Property
-
-    Public Property SelectedBackColor As XmlColor
-        Get
-            Return Me.theSelectedBackColor
-        End Get
-        Set(value As XmlColor)
-            Me.theSelectedBackColor = value
-        End Set
-    End Property
-
-    Public Property SelectedBorderColor As XmlColor
-        Get
-            Return Me.theSelectedBorderColor
-        End Get
-        Set(value As XmlColor)
-            Me.theSelectedBorderColor = value
-        End Set
-    End Property
-
-    Public Property SelectedBorderWidth As Integer
-        Get
-            Return Me.theSelectedBorderWidth
-        End Get
-        Set(value As Integer)
-            Me.theSelectedBorderWidth = value
-        End Set
-    End Property
-
     Public Property FocusForeColor As XmlColor
         Get
             Return Me.theFocusForeColor
@@ -226,11 +173,6 @@ Public Class WidgetTheme
     Protected theDisabledBackColor As XmlColor
     Protected theDisabledBorderColor As XmlColor
     Protected theDisabledBorderWidth As Integer
-
-    Protected theSelectedForeColor As XmlColor
-    Protected theSelectedBackColor As XmlColor
-    Protected theSelectedBorderColor As XmlColor
-    Protected theSelectedBorderWidth As Integer
 
     Protected theFocusForeColor As XmlColor
     Protected theFocusBackColor As XmlColor
