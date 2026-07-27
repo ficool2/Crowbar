@@ -552,6 +552,7 @@ Public Class DataGridViewEx
 		MyBase.OnRowsAdded(e)
 		'NOTE: Raise the OnNonClientCalcSize and OnNonClientPaint "events".
 		Win32Api.SetWindowPos(Me.Handle, IntPtr.Zero, 0, 0, 0, 0, Win32Api.SWP.SWP_FRAMECHANGED Or Win32Api.SWP.SWP_NOMOVE Or Win32Api.SWP.SWP_NOSIZE Or Win32Api.SWP.SWP_NOZORDER)
+		Me.Invalidate()
 		Me.UpdateScrollbars()
 	End Sub
 
@@ -561,6 +562,7 @@ Public Class DataGridViewEx
 		If Me.Parent IsNot Nothing Then
 			'NOTE: Raise the OnNonClientCalcSize and OnNonClientPaint "events".
 			Win32Api.SetWindowPos(Me.Handle, IntPtr.Zero, 0, 0, 0, 0, Win32Api.SWP.SWP_FRAMECHANGED Or Win32Api.SWP.SWP_NOMOVE Or Win32Api.SWP.SWP_NOSIZE Or Win32Api.SWP.SWP_NOZORDER)
+			Me.Invalidate()
 			Me.UpdateScrollbars()
 		End If
 	End Sub
@@ -588,10 +590,11 @@ Public Class DataGridViewEx
 		If Me.theControlHasShown Then
 			MyBase.OnSizeChanged(e)
 			If Not Me.theScrollingIsActive Then
-				''NOTE: Raise the OnNonClientCalcSize and OnNonClientPaint "events".
-				'Win32Api.SetWindowPos(Me.Handle, IntPtr.Zero, 0, 0, 0, 0, Win32Api.SWP.SWP_FRAMECHANGED Or Win32Api.SWP.SWP_NOMOVE Or Win32Api.SWP.SWP_NOSIZE Or Win32Api.SWP.SWP_NOZORDER)
+				'NOTE: Raise the OnNonClientCalcSize and OnNonClientPaint "events".
+				Win32Api.SetWindowPos(Me.Handle, IntPtr.Zero, 0, 0, 0, 0, Win32Api.SWP.SWP_FRAMECHANGED Or Win32Api.SWP.SWP_NOMOVE Or Win32Api.SWP.SWP_NOSIZE Or Win32Api.SWP.SWP_NOZORDER)
 				Me.Invalidate()
 				Me.UpdateScrollbars()
+				'Me.Refresh()
 			End If
 		End If
 	End Sub
@@ -922,6 +925,7 @@ Public Class DataGridViewEx
 		Dim bottom As Integer = 0
 
 		Dim contentWidth As Integer = Me.Columns.GetColumnsWidth(DataGridViewElementStates.Visible)
+		'Dim clientWidth As Integer = Math.Min(Me.ClientRectangle.Width, Me.Width)
 		Dim clientWidth As Integer = Me.Width
 		If contentWidth > clientWidth Then
 			bottom += ScrollBarEx.Consts.ScrollBarSize
@@ -930,9 +934,12 @@ Public Class DataGridViewEx
 		If rowCount > 0 Then
 			'Dim contentHeight As Integer = rowCount * Me.Rows(0).Height
 			Dim contentHeight As Integer = Me.Rows.GetRowsHeight(DataGridViewElementStates.Visible)
-			Dim clientHeight As Integer = Me.Height
+			'Dim clientHeight As Integer = Math.Min(Me.ClientRectangle.Height, Me.Height)
+			Dim clientHeight As Integer = Me.ClientRectangle.Height
 			If Me.ColumnHeadersVisible Then
-				contentHeight += Me.ColumnHeadersHeight
+				'contentHeight += Me.ColumnHeadersHeight
+				' No idea why, but the "* 2" makes this work.
+				contentHeight += Me.ColumnHeadersHeight * 2
 			End If
 			If contentHeight > clientHeight Then
 				right += ScrollBarEx.Consts.ScrollBarSize
@@ -1022,13 +1029,13 @@ Public Class DataGridViewEx
 				'	Me.ScrollbarCornerPanel.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize, ScrollBarEx.Consts.ScrollBarSize)
 				'	Me.ScrollbarCornerPanel.RightAndBottomBorderWidth = 0
 				'End If
-				If theme.EnabledBorderWidth > 0 Then
-					Me.ScrollbarCornerPanel.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth, ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth)
-					Me.ScrollbarCornerPanel.RightAndBottomBorderWidth = theme.EnabledBorderWidth
-				Else
-					Me.ScrollbarCornerPanel.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize, ScrollBarEx.Consts.ScrollBarSize)
-					Me.ScrollbarCornerPanel.RightAndBottomBorderWidth = 0
-				End If
+				'If theme.EnabledBorderWidth > 0 Then
+				Me.ScrollbarCornerPanel.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth, ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth)
+				Me.ScrollbarCornerPanel.RightAndBottomBorderWidth = theme.EnabledBorderWidth
+				'Else
+				'	Me.ScrollbarCornerPanel.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize, ScrollBarEx.Consts.ScrollBarSize)
+				'	Me.ScrollbarCornerPanel.RightAndBottomBorderWidth = 0
+				'End If
 				'NOTE: Assign to Parent so it can draw over non-client area.
 				Me.ScrollbarCornerPanel.Parent = Me.Parent
 				Me.ScrollbarCornerPanel.BringToFront()
@@ -1084,13 +1091,13 @@ Public Class DataGridViewEx
 				'	Me.CustomHorizontalScrollbar.RightAndBottomBorderWidth = 0
 				'End If
 				Dim theme As DataGridViewTheme = TheApp.Settings.SelectedAppTheme.DataGridViewTheme
-				If theme.EnabledBorderWidth > 0 Then
-					Me.CustomHorizontalScrollbar.Size = New System.Drawing.Size(Me.ClientRectangle.Width, ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth)
-					Me.CustomHorizontalScrollbar.RightAndBottomBorderWidth = theme.EnabledBorderWidth
-				Else
-					Me.CustomHorizontalScrollbar.Size = New System.Drawing.Size(Me.ClientRectangle.Width, ScrollBarEx.Consts.ScrollBarSize)
-					Me.CustomHorizontalScrollbar.RightAndBottomBorderWidth = 0
-				End If
+				'If theme.EnabledBorderWidth > 0 Then
+				Me.CustomHorizontalScrollbar.Size = New System.Drawing.Size(Me.ClientRectangle.Width, ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth)
+				Me.CustomHorizontalScrollbar.RightAndBottomBorderWidth = theme.EnabledBorderWidth
+				'Else
+				'	Me.CustomHorizontalScrollbar.Size = New System.Drawing.Size(Me.ClientRectangle.Width, ScrollBarEx.Consts.ScrollBarSize)
+				'	Me.CustomHorizontalScrollbar.RightAndBottomBorderWidth = 0
+				'End If
 				Me.CustomHorizontalScrollbar.Show()
 
 				Me.theScrollingIsActive = False
@@ -1144,13 +1151,13 @@ Public Class DataGridViewEx
 					'	Me.CustomVerticalScrollBar.RightAndBottomBorderWidth = 0
 					'End If
 					Dim theme As DataGridViewTheme = TheApp.Settings.SelectedAppTheme.DataGridViewTheme
-					If theme.EnabledBorderWidth > 0 Then
-						Me.CustomVerticalScrollBar.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth, Me.ClientRectangle.Height)
-						Me.CustomVerticalScrollBar.RightAndBottomBorderWidth = theme.EnabledBorderWidth
-					Else
-						Me.CustomVerticalScrollBar.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize, Me.ClientRectangle.Height)
-						Me.CustomVerticalScrollBar.RightAndBottomBorderWidth = 0
-					End If
+					'If theme.EnabledBorderWidth > 0 Then
+					Me.CustomVerticalScrollBar.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize + theme.EnabledBorderWidth, Me.ClientRectangle.Height)
+					Me.CustomVerticalScrollBar.RightAndBottomBorderWidth = theme.EnabledBorderWidth
+					'Else
+					'	Me.CustomVerticalScrollBar.Size = New System.Drawing.Size(ScrollBarEx.Consts.ScrollBarSize, Me.ClientRectangle.Height)
+					'	Me.CustomVerticalScrollBar.RightAndBottomBorderWidth = 0
+					'End If
 					Me.CustomVerticalScrollBar.Show()
 
 					Me.theScrollingIsActive = False

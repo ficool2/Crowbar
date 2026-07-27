@@ -509,14 +509,20 @@ Public Class ScrollBarEx
 		' Paint right and bottom borders.
 		If Me.theRightAndBottomBorderWidth > 0 Then
 			Using borderColorPen As New Pen(Me.theRightAndBottomBorderColor, Me.theRightAndBottomBorderWidth)
-				' - 1 for 0-based coord
-				Dim rightBottomPoint As New Point(Me.ClientRectangle.Right - 1, Me.ClientRectangle.Bottom - 1)
+				Dim rightTopPoint As New Point(Me.ClientRectangle.Right, 0)
+				Dim leftBottomPoint As New Point(0, Me.ClientRectangle.Bottom)
+				Dim rightBottomPoint As New Point(Me.ClientRectangle.Right, Me.ClientRectangle.Bottom)
+				If Me.theRightAndBottomBorderWidth = 1 Then
+					'NOTE: DrawLine width and height are interpreted as the right and bottom pixels to draw when pen width is 1.
+					rightTopPoint.X -= 1
+					leftBottomPoint.Y -= 1
+					rightBottomPoint.X -= 1
+					rightBottomPoint.Y -= 1
+				End If
 				If Me._scrollOrientation = DarkScrollOrientation.Horizontal Then
-					Dim leftBottomPoint As New Point(0, Me.ClientRectangle.Bottom - 1)
 					borderColorPen.Alignment = Drawing2D.PenAlignment.Outset
 					g.DrawLine(borderColorPen, leftBottomPoint, rightBottomPoint)
 				Else
-					Dim rightTopPoint As New Point(Me.ClientRectangle.Right - 1, 0)
 					borderColorPen.Alignment = Drawing2D.PenAlignment.Inset
 					g.DrawLine(borderColorPen, rightTopPoint, rightBottomPoint)
 				End If
