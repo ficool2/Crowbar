@@ -23,6 +23,8 @@ Public MustInherit Class SourceModel
 			'Else
 			If version = 6 Then
 				model = New SourceModel06(mdlPathFileName, version)
+			ElseIf version = 9 Then
+				model = New SourceModel09(mdlPathFileName, version)
 			ElseIf version = 10 Then
 				model = New SourceModel10(mdlPathFileName, version)
 				'ElseIf version = 11 Then
