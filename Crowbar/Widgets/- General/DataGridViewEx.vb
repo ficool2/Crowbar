@@ -924,11 +924,13 @@ Public Class DataGridViewEx
 		Dim right As Integer = 0
 		Dim bottom As Integer = 0
 
-		Dim contentWidth As Integer = Me.Columns.GetColumnsWidth(DataGridViewElementStates.Visible)
-		'Dim clientWidth As Integer = Math.Min(Me.ClientRectangle.Width, Me.Width)
-		Dim clientWidth As Integer = Me.Width
-		If contentWidth > clientWidth Then
-			bottom += ScrollBarEx.Consts.ScrollBarSize
+		If Me.AutoSizeColumnsMode <> DataGridViewAutoSizeColumnsMode.Fill Then
+			Dim contentWidth As Integer = Me.Columns.GetColumnsWidth(DataGridViewElementStates.Visible)
+			'Dim clientWidth As Integer = Math.Min(Me.ClientRectangle.Width, Me.Width)
+			Dim clientWidth As Integer = Me.Width
+			If contentWidth > clientWidth Then
+				bottom += ScrollBarEx.Consts.ScrollBarSize
+			End If
 		End If
 		Dim rowCount As Integer = Me.RowCount
 		If rowCount > 0 Then
@@ -1018,7 +1020,9 @@ Public Class DataGridViewEx
 			theme = TheApp.Settings.SelectedAppTheme.DataGridViewTheme
 		End If
 		If theme IsNot Nothing Then
-			Me.UpdateHorizontalScrollbar()
+			If Me.AutoSizeColumnsMode <> DataGridViewAutoSizeColumnsMode.Fill Then
+				Me.UpdateHorizontalScrollbar()
+			End If
 			Me.UpdateVerticalScrollbar()
 
 			If Me.CustomHorizontalScrollbar.Visible AndAlso Me.CustomVerticalScrollBar.Visible Then
