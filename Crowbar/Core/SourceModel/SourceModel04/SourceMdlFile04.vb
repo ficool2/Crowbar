@@ -274,27 +274,27 @@ Public Class SourceMdlFile04
 			Dim fileOffsetEnd As Long
 
 			Try
-				aSequenceDesc.theSequences = New List(Of SourceMdlSequenceFrame04)(aSequenceDesc.frameCount)
+				aSequenceDesc.theSequenceFrames = New List(Of SourceMdlSequenceFrame04)(aSequenceDesc.frameCount)
 				For sequenceIndex As Integer = 0 To aSequenceDesc.frameCount - 1
 					fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					Dim aSequence As New SourceMdlSequenceFrame04()
+					Dim aSequenceFrame As New SourceMdlSequenceFrame04()
 
-					aSequence.frameId = Me.theInputFileReader.ReadSingle()
-					For x As Integer = 0 To aSequence.unknown.Length - 1
-						aSequence.unknown(x) = Me.theInputFileReader.ReadInt32()
+					aSequenceFrame.frameId = Me.theInputFileReader.ReadSingle()
+					For x As Integer = 0 To aSequenceFrame.unknown.Length - 1
+						aSequenceFrame.unknown(x) = Me.theInputFileReader.ReadInt32()
 					Next
-					aSequence.frame_root_motion = New SourceVector()
-					aSequence.frame_root_motion.x = Me.theInputFileReader.ReadSingle()
-					aSequence.frame_root_motion.y = Me.theInputFileReader.ReadSingle()
-					aSequence.frame_root_motion.z = Me.theInputFileReader.ReadSingle()
+					aSequenceFrame.frame_root_motion = New SourceVector()
+					aSequenceFrame.frame_root_motion.x = Me.theInputFileReader.ReadSingle()
+					aSequenceFrame.frame_root_motion.y = Me.theInputFileReader.ReadSingle()
+					aSequenceFrame.frame_root_motion.z = Me.theInputFileReader.ReadSingle()
 
-					aSequenceDesc.theSequences.Add(aSequence)
+					aSequenceDesc.theSequenceFrames.Add(aSequenceFrame)
 
 					fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
 					Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence")
 
-					Me.ReadSequenceValues(aSequence)
+					Me.ReadSequenceValues(aSequenceFrame)
 				Next
 
 				'fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -320,9 +320,9 @@ Public Class SourceMdlFile04
 				For sequenceIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 					Dim aSequenceValue As New SourceMdlSequenceValue04()
 
-					aSequenceValue.rotationX = Me.theInputFileReader.ReadInt16()
-					aSequenceValue.rotationY = Me.theInputFileReader.ReadInt16()
-					aSequenceValue.rotationZ = Me.theInputFileReader.ReadInt16()
+					aSequenceValue.rotationX = Me.theInputFileReader.ReadUInt16()
+					aSequenceValue.rotationY = Me.theInputFileReader.ReadUInt16()
+					aSequenceValue.rotationZ = Me.theInputFileReader.ReadUInt16()
 
 					aSequence.theSequenceValues.Add(aSequenceValue)
 				Next

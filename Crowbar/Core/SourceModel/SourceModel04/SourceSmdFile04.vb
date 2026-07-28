@@ -149,7 +149,7 @@ Public Class SourceSmdFile04
 			line += CStr(frameIndex)
 			Me.theOutputFileStreamWriter.WriteLine(line)
 
-			aSequence = aSequenceDesc.theSequences(frameIndex)
+			aSequence = aSequenceDesc.theSequenceFrames(frameIndex)
 			For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 				aBone = Me.theMdlFileData.theBones(boneIndex)
 
@@ -185,9 +185,37 @@ Public Class SourceSmdFile04
 				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
 				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
 				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909 + MathModule.DegreesToRadians(-90)
+				'======
+				' Somewhat looks like a humanoid.
 				rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
 				rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
 				rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				'------
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX
+				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ
+				'------
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				'------
+				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
+				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
+				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+
+				'Dim rotationQuat As SourceQuaternion
+				'rotationQuat = MathModule.EulerAnglesToQuaternion(rotation)
+				''Dim newRotation As  SourceVector = MathModule.ToEulerAngles(rotationQuat)
+				'Dim newRotationQuat As New SourceQuaternion()
+				'newRotationQuat.x = rotationQuat.y
+				'newRotationQuat.y = rotationQuat.x
+				'newRotationQuat.z = rotationQuat.z
+				'newRotationQuat.w = rotationQuat.w
+				'Dim newRotation As SourceVector = MathModule.ToEulerAngles(newRotationQuat)
+				'------
+				'Dim rotationQuat As SourceQuaternion
+				'rotationQuat = EulerToQuaternion(rotation)
+				'Dim newRotation As SourceVector = QuaternionToEuler(rotationQuat)
 
 				line = "    "
 				line += boneIndex.ToString(TheApp.InternalNumberFormat)
@@ -205,6 +233,12 @@ Public Class SourceSmdFile04
 				line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
 				line += " "
 				line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
+				'line += " "
+				'line += newRotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
+				'line += " "
+				'line += newRotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
+				'line += " "
+				'line += newRotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
 
 				'If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
 				'	line += "   # "
@@ -308,12 +342,17 @@ Public Class SourceSmdFile04
 			'position.x = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.x
 			'position.y = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.y
 			'position.z = aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector.z
+			'======
 			MathModule.VectorCopy(aBodyModel.theVertexes(aVertexInfo.vertexIndex).vector, vecin)
 			rawPosition = MathModule.VectorTransform(vecin, boneTransform.matrixColumn0, boneTransform.matrixColumn1, boneTransform.matrixColumn2, boneTransform.matrixColumn3)
 
 			position.x = rawPosition.y
 			position.y = -rawPosition.x
 			position.z = rawPosition.z
+			'------
+			'position.x = rawPosition.x
+			'position.y = rawPosition.y
+			'position.z = rawPosition.z
 
 			'normal.x = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.x
 			'normal.y = aBodyModel.theNormals(aVertexInfo.normalIndex).vector.y
