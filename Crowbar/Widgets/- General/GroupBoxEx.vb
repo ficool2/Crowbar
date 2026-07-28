@@ -1,3 +1,5 @@
+Imports System.Runtime.InteropServices
+
 Public Class GroupBoxEx
 	Inherits GroupBox
 
@@ -215,14 +217,14 @@ Public Class GroupBoxEx
 			Dim clientRectangle As Rectangle = Me.ClientRectangle
 
 			' Draw background.
-			Using backColorBrush As New SolidBrush(WidgetBackColor)
+			Using backColorBrush As New SolidBrush(Me.BackColor)
 				g.FillRectangle(backColorBrush, clientRectangle)
 			End Using
 
 			Dim stringSize As SizeF = TextRenderer.MeasureText(Me.Text, Me.Font)
 
 			' Draw groupbox border.
-			Using borderPen As New Pen(WidgetDisabledTextColor)
+			Using borderPen As New Pen(theme.EnabledBorderColor)
 				Dim borderRect As New Rectangle(0, CInt(stringSize.Height / 2), clientRectangle.Width - 1, clientRectangle.Height - CInt(stringSize.Height / 2) - 1)
 				g.DrawRectangle(borderPen, borderRect)
 			End Using
@@ -230,7 +232,7 @@ Public Class GroupBoxEx
 			' Draw text background and text.
 			Dim textIndent As Integer = 6
 			Dim textRect As New Rectangle(clientRectangle.X + textIndent, clientRectangle.Y, clientRectangle.Width - (textIndent * 2), CInt(stringSize.Height))
-			TextRenderer.DrawText(g, Me.Text, Me.Font, textRect, WidgetTextColor, WidgetBackColor, TextFormatFlags.Left Or TextFormatFlags.VerticalCenter Or TextFormatFlags.WordEllipsis Or TextFormatFlags.LeftAndRightPadding)
+			TextRenderer.DrawText(g, Me.Text, Me.Font, textRect, Me.ForeColor, Me.BackColor, TextFormatFlags.Left Or TextFormatFlags.VerticalCenter Or TextFormatFlags.WordEllipsis Or TextFormatFlags.LeftAndRightPadding)
 		Else
 			MyBase.OnPaint(e)
 		End If
@@ -289,12 +291,10 @@ Public Class GroupBoxEx
 			Else
 				Me.ForeColor = theme.EnabledForeColor
 			End If
-			MyBase.BackColor = theme.EnabledBackColor
-			'MyBase.BackColor = Color.Red
-
+			Me.BackColor = theme.EnabledBackColor
 		Else
 			Me.ForeColor = Control.DefaultForeColor
-			MyBase.BackColor = Control.DefaultBackColor
+			Me.BackColor = Control.DefaultBackColor
 		End If
 	End Sub
 
