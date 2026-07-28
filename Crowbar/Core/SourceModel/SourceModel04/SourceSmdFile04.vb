@@ -134,7 +134,6 @@ Public Class SourceSmdFile04
 		Dim aSequence As SourceMdlSequenceFrame04
 		Dim position As New SourceVector()
 		Dim rotation As New SourceVector()
-		'Dim tempValue As Double
 
 		'skeleton
 		line = "skeleton"
@@ -158,64 +157,15 @@ Public Class SourceSmdFile04
 					position.y = aBone.position.y + aSequence.frame_root_motion.y
 					position.z = aBone.position.z + aSequence.frame_root_motion.z
 
-					''NOTE: cos(90) = 0; sin(90) = 1
-					'tempValue = position.x
-					'position.x = position.y
-					'position.y = -tempValue
-
-					'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
-					'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-					'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909 + MathModule.DegreesToRadians(-90)
 				Else
 					position.x = aBone.position.x
 					position.y = aBone.position.y
 					position.z = aBone.position.z
-
-					'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
-					'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-					'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
 				End If
 
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
-				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909 + MathModule.DegreesToRadians(-90)
-				'======
-				' Somewhat looks like a humanoid.
 				rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
 				rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
 				rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
-				'------
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationX
-				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationY
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ
-				'------
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				'rotation.y = -(aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909)
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
-				'------
-				'rotation.x = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				'rotation.y = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
-				'rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
-
-				'Dim rotationQuat As SourceQuaternion
-				'rotationQuat = MathModule.EulerAnglesToQuaternion(rotation)
-				''Dim newRotation As  SourceVector = MathModule.ToEulerAngles(rotationQuat)
-				'Dim newRotationQuat As New SourceQuaternion()
-				'newRotationQuat.x = rotationQuat.y
-				'newRotationQuat.y = rotationQuat.x
-				'newRotationQuat.z = rotationQuat.z
-				'newRotationQuat.w = rotationQuat.w
-				'Dim newRotation As SourceVector = MathModule.ToEulerAngles(newRotationQuat)
-				'------
-				'Dim rotationQuat As SourceQuaternion
-				'rotationQuat = EulerToQuaternion(rotation)
-				'Dim newRotation As SourceVector = QuaternionToEuler(rotationQuat)
 
 				line = "    "
 				line += boneIndex.ToString(TheApp.InternalNumberFormat)
@@ -233,12 +183,6 @@ Public Class SourceSmdFile04
 				line += rotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
 				line += " "
 				line += rotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
-				'line += " "
-				'line += newRotation.x.ToString("0.000000", TheApp.InternalNumberFormat)
-				'line += " "
-				'line += newRotation.y.ToString("0.000000", TheApp.InternalNumberFormat)
-				'line += " "
-				'line += newRotation.z.ToString("0.000000", TheApp.InternalNumberFormat)
 
 				'If TheApp.Settings.DecompileDebugInfoFilesIsChecked Then
 				'	line += "   # "
