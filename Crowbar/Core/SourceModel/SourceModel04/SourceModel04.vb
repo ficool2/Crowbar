@@ -239,6 +239,23 @@ Public Class SourceModel04
 		mdlFile.BuildBoneTransforms()
 	End Sub
 
+	Protected Overrides Sub WriteQcFile()
+		Dim qcFile As New SourceQcFile04(Me.theOutputFileTextWriter, Me.theQcPathFileName, Me.theMdlFileData, Me.theName)
+
+		Try
+			qcFile.WriteHeaderComment()
+
+			qcFile.WriteModelNameCommand()
+
+			qcFile.WriteBodyGroupCommand()
+
+			qcFile.WriteSequenceCommands()
+		Catch ex As Exception
+			Dim debug As Integer = 4242
+		Finally
+		End Try
+	End Sub
+
 	Protected Overloads Function WriteMeshSmdFile(ByVal smdPathFileName As String, ByVal aModel As SourceMdlModel04) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 

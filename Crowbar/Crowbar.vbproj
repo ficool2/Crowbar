@@ -148,6 +148,7 @@
     <Compile Include="Core\Packer\PackerOutputInfo.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceBoneTransform04.vb" />
     <Compile Include="Core\SourceModel\SourceModel04\SourceMdlFileData\SourceMdlSequenceFrame04.vb" />
+    <Compile Include="Core\SourceModel\SourceModel04\SourceQcFile04.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFile14.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFileData\SourceMdlBodyPart14.vb" />
     <Compile Include="Core\SourceModel\SourceModel14\SourceMdlFileData\SourceMdlFileData14.vb" />

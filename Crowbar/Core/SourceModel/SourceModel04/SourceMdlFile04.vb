@@ -39,14 +39,18 @@ Public Class SourceMdlFile04
 
 		Me.theMdlFileData.boneCount = Me.theInputFileReader.ReadInt32()
 		Me.theMdlFileData.bodyPartCount = Me.theInputFileReader.ReadInt32()
-		Me.theMdlFileData.unknownCount = Me.theInputFileReader.ReadInt32()
-		Me.theMdlFileData.sequenceDescCount = Me.theInputFileReader.ReadInt32()
-		Me.theMdlFileData.sequenceFrameCount = Me.theInputFileReader.ReadInt32()
-
 		Me.theMdlFileData.unknown02 = Me.theInputFileReader.ReadInt32()
+		Me.theMdlFileData.sequenceDescCount = Me.theInputFileReader.ReadInt32()
+		Me.theMdlFileData.unknown03 = Me.theInputFileReader.ReadInt32()
 
+		Me.theMdlFileData.unknown04 = Me.theInputFileReader.ReadInt32()
+
+		Dim unknown01String As String = "   unknown01 = " + Me.theMdlFileData.unknown01.ToString(TheApp.InternalNumberFormat) + "(0x" + Me.theMdlFileData.unknown01.ToString("X8") + ")"
+		Dim unknown02String As String = "   unknown02 = " + Me.theMdlFileData.unknown02.ToString(TheApp.InternalNumberFormat) + "(0x" + Me.theMdlFileData.unknown02.ToString("X8") + ")"
+		Dim unknown03String As String = "   unknown03 = " + Me.theMdlFileData.unknown03.ToString(TheApp.InternalNumberFormat) + "(0x" + Me.theMdlFileData.unknown03.ToString("X8") + ")"
+		Dim unknown04String As String = "   unknown04 = " + Me.theMdlFileData.unknown04.ToString(TheApp.InternalNumberFormat) + "(0x" + Me.theMdlFileData.unknown04.ToString("X8") + ")"
 		fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
-		Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "MDL File Header")
+		Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "MDL File Header" + unknown01String + unknown02String + unknown03String + unknown04String)
 	End Sub
 
 	Public Sub ReadBones()
@@ -66,25 +70,6 @@ Public Class SourceMdlFile04
 					aBone.position.x = Me.theInputFileReader.ReadSingle()
 					aBone.position.y = Me.theInputFileReader.ReadSingle()
 					aBone.position.z = Me.theInputFileReader.ReadSingle()
-					'If aBone.parentBoneIndex > -1 Then
-					'	aBone.position.x += Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.x
-					'	aBone.position.y += Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.y
-					'	aBone.position.z += Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.z
-					'End If
-					'If aBone.parentBoneIndex > -1 Then
-					'	aBone.position.x -= Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.x
-					'	aBone.position.y -= Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.y
-					'	aBone.position.z -= Me.theMdlFileData.theBones(aBone.parentBoneIndex).position.z
-					'End If
-					'aBone.rotationX.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.rotationY.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.rotationZ.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.positionX.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.positionY.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.positionZ.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.rotationX.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.rotationY.the16BitValue = Me.theInputFileReader.ReadUInt16()
-					'aBone.rotationZ.the16BitValue = Me.theInputFileReader.ReadUInt16()
 
 					Me.theMdlFileData.theBones.Add(aBone)
 				Next
@@ -122,7 +107,7 @@ Public Class SourceMdlFile04
 					Me.theMdlFileData.theSequenceDescs.Add(aSequenceDesc)
 
 					fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
-					Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceDesc theName = " + aSequenceDesc.theName)
+					Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceDesc theName = " + aSequenceDesc.theName + "   frameCount = " + CStr(aSequenceDesc.frameCount) + "   flag = " + CStr(aSequenceDesc.flag))
 				Next
 
 				'fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
@@ -132,7 +117,7 @@ Public Class SourceMdlFile04
 
 				fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-				For i As Integer = 0 To Me.theMdlFileData.unknownCount - 1
+				For i As Integer = 0 To Me.theMdlFileData.unknown02 - 1
 					Dim unknown As Integer = Me.theInputFileReader.ReadInt32()
 				Next
 
@@ -193,6 +178,10 @@ Public Class SourceMdlFile04
 		End If
 	End Sub
 
+	Public Sub ReadUnreadBytes()
+		Me.theMdlFileData.theFileSeekLog.LogUnreadBytes(Me.theInputFileReader)
+	End Sub
+
 	'' The bone positions and rotations do not seem correct, so get them from the first sequence's first frame.
 	'Public Sub GetBoneDataFromFirstSequenceFirstFrame()
 	'	Dim aSequence As SourceMdlSequenceDesc04
@@ -212,10 +201,6 @@ Public Class SourceMdlFile04
 	'		aBone.rotation.z = anAnimation.theBonePositionsAndRotations(0).rotation.z
 	'	Next
 	'End Sub
-
-	Public Sub ReadUnreadBytes()
-		Me.theMdlFileData.theFileSeekLog.LogUnreadBytes(Me.theInputFileReader)
-	End Sub
 
 	Public Sub BuildBoneTransforms()
 		Me.theMdlFileData.theBoneTransforms = New List(Of SourceBoneTransform04)(Me.theMdlFileData.theBones.Count)
@@ -277,12 +262,16 @@ Public Class SourceMdlFile04
 				aSequenceDesc.theSequenceFrames = New List(Of SourceMdlSequenceFrame04)(aSequenceDesc.frameCount)
 				For sequenceIndex As Integer = 0 To aSequenceDesc.frameCount - 1
 					fileOffsetStart = Me.theInputFileReader.BaseStream.Position
+					Dim anUnknownHasNonZeroValue As Boolean = False
 
 					Dim aSequenceFrame As New SourceMdlSequenceFrame04()
 
 					aSequenceFrame.frameId = Me.theInputFileReader.ReadSingle()
 					For x As Integer = 0 To aSequenceFrame.unknown.Length - 1
 						aSequenceFrame.unknown(x) = Me.theInputFileReader.ReadInt32()
+						If aSequenceFrame.unknown(x) <> 0 Then
+							anUnknownHasNonZeroValue = True
+						End If
 					Next
 					aSequenceFrame.frame_root_motion = New SourceVector()
 					aSequenceFrame.frame_root_motion.x = Me.theInputFileReader.ReadSingle()
@@ -291,8 +280,16 @@ Public Class SourceMdlFile04
 
 					aSequenceDesc.theSequenceFrames.Add(aSequenceFrame)
 
+					Dim temp As String = "   unknowns(11):"
+					If anUnknownHasNonZeroValue Then
+						For x As Integer = 0 To aSequenceFrame.unknown.Length - 1
+							temp += " " + aSequenceFrame.unknown(x).ToString(TheApp.InternalNumberFormat) + "(0x" + aSequenceFrame.unknown(x).ToString("X8") + ")"
+						Next
+					Else
+						temp += " [all zeroes]"
+					End If
 					fileOffsetEnd = Me.theInputFileReader.BaseStream.Position - 1
-					Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequence")
+					Me.theMdlFileData.theFileSeekLog.Add(fileOffsetStart, fileOffsetEnd, "aSequenceFrame" + temp)
 
 					Me.ReadSequenceValues(aSequenceFrame)
 				Next

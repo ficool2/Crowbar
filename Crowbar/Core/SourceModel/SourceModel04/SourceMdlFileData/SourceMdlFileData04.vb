@@ -13,13 +13,11 @@ Public Class SourceMdlFileData04
 
 	Public boneCount As Integer
 	Public bodyPartCount As Integer
-	' modelCount? Why would this value be here if it's already in SourceMdlBodyPart04?
-	Public unknownCount As Integer
-	Public sequenceDescCount As Integer
-	' Total frames from all sequences + an extra for each sequence.
-	Public sequenceFrameCount As Integer
-
 	Public unknown02 As Integer
+	Public sequenceDescCount As Integer
+	Public unknown03 As Integer
+
+	Public unknown04 As Integer
 
 	Public theBodyParts As List(Of SourceMdlBodyPart04)
 	Public theBones As List(Of SourceMdlBone04)

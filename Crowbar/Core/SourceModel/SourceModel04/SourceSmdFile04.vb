@@ -34,7 +34,7 @@ Public Class SourceSmdFile04
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
-			name = "bone" + boneIndex.ToString()
+			name = "bone" + boneIndex.ToString(TheApp.InternalNumberFormat)
 
 			line = "  "
 			line += boneIndex.ToString(TheApp.InternalNumberFormat)
@@ -85,27 +85,6 @@ Public Class SourceSmdFile04
 				rotation.y = 0
 				rotation.z = 0
 			End If
-
-			'If aBone.parentBoneIndex = -1 Then
-			'	position.x = aBone.positionY.TheFloatValue
-			'	position.y = -aBone.positionX.TheFloatValue
-			'	position.z = aBone.positionZ.TheFloatValue
-
-			'	rotation.x = aBone.rotationX.TheFloatValue
-			'	rotation.y = aBone.rotationY.TheFloatValue
-			'	rotation.z = aBone.rotationZ.TheFloatValue + MathModule.DegreesToRadians(-90)
-			'Else
-			'	position.x = aBone.positionX.TheFloatValue
-			'	position.y = aBone.positionY.TheFloatValue
-			'	position.z = aBone.positionZ.TheFloatValue
-
-			'	''rotation.x = MathModule.DegreesToRadians(aBone.rotationX / 200)
-			'	''rotation.y = MathModule.DegreesToRadians(aBone.rotationY / 200)
-			'	''rotation.z = MathModule.DegreesToRadians(aBone.rotationZ / 200)
-			'	rotation.x = aBone.rotationX.TheFloatValue
-			'	rotation.y = aBone.rotationY.TheFloatValue
-			'	rotation.z = aBone.rotationZ.TheFloatValue
-			'End If
 
 			line = "    "
 			line += boneIndex.ToString(TheApp.InternalNumberFormat)
@@ -163,9 +142,12 @@ Public Class SourceSmdFile04
 					position.z = aBone.position.z
 				End If
 
-				rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453293548896909
-				rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453293548896909
-				rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453293548896909
+				' Degrees to radians = PI / 180 =          0.01745329251994329576923690768489
+				' Multiply by 0.01 to get proper scale = 0.00017453292519943295769236907684886
+				' VB rounds it to:                       0.00017453292519943296
+				rotation.x = aSequence.theSequenceValues(boneIndex).rotationX * 0.00017453292519943296
+				rotation.y = aSequence.theSequenceValues(boneIndex).rotationY * 0.00017453292519943296
+				rotation.z = aSequence.theSequenceValues(boneIndex).rotationZ * 0.00017453292519943296
 
 				line = "    "
 				line += boneIndex.ToString(TheApp.InternalNumberFormat)
