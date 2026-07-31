@@ -127,6 +127,9 @@ Public Class SourceMdlFile09
 					aBone.name = Me.theInputFileReader.ReadChars(32)
 					aBone.theName = aBone.name
 					aBone.theName = StringClass.ConvertFromNullTerminatedOrFullLengthString(aBone.theName)
+					If aBone.theName = "" Then
+						aBone.theName = "unnamed_bone_" + boneIndex.ToString("000")
+					End If
 					aBone.parentBoneIndex = Me.theInputFileReader.ReadInt32()
 					aBone.flags = Me.theInputFileReader.ReadInt32()
 					For boneControllerIndexIndex As Integer = 0 To aBone.boneControllerIndex.Length - 1
@@ -303,10 +306,10 @@ Public Class SourceMdlFile09
 
 			Try
 				Me.theInputFileReader.BaseStream.Seek(Me.theMdlFileData.sequenceOffset, SeekOrigin.Begin)
-				Me.theMdlFileData.theSequences = New List(Of SourceMdlSequenceDesc10)(Me.theMdlFileData.sequenceCount)
+				Me.theMdlFileData.theSequences = New List(Of SourceMdlSequenceDesc09)(Me.theMdlFileData.sequenceCount)
 				For sequenceIndex As Integer = 0 To Me.theMdlFileData.sequenceCount - 1
 					'sequenceInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
-					Dim aSequence As New SourceMdlSequenceDesc10()
+					Dim aSequence As New SourceMdlSequenceDesc09()
 
 					fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
@@ -487,7 +490,7 @@ Public Class SourceMdlFile09
 			Dim fileOffsetEnd As Long
 			'Dim fileOffsetStart2 As Long
 			'Dim fileOffsetEnd2 As Long
-			Dim aSequence As SourceMdlSequenceDesc10
+			Dim aSequence As SourceMdlSequenceDesc09
 			Dim animationValuesEndInputFileStreamPosition As Long
 
 			Try
@@ -502,12 +505,12 @@ Public Class SourceMdlFile09
 					Me.theInputFileReader.BaseStream.Seek(aSequence.animOffset, SeekOrigin.Begin)
 					'fileOffsetStart = Me.theInputFileReader.BaseStream.Position
 
-					aSequence.theAnimations = New List(Of SourceMdlAnimation10)(aSequence.blendCount * Me.theMdlFileData.theBones.Count)
+					aSequence.theAnimations = New List(Of SourceMdlAnimation09)(aSequence.blendCount * Me.theMdlFileData.theBones.Count)
 					For blendIndex As Integer = 0 To aSequence.blendCount - 1
 						For boneIndex As Integer = 0 To Me.theMdlFileData.theBones.Count - 1
 							animationInputFileStreamPosition = Me.theInputFileReader.BaseStream.Position
 							fileOffsetStart = Me.theInputFileReader.BaseStream.Position
-							Dim anAnimation As New SourceMdlAnimation10()
+							Dim anAnimation As New SourceMdlAnimation09()
 
 							For offsetIndex As Integer = 0 To anAnimation.animationValueOffsets.Length - 1
 								anAnimation.animationValueOffsets(offsetIndex) = Me.theInputFileReader.ReadUInt16()
@@ -857,7 +860,7 @@ Public Class SourceMdlFile09
 
 #Region "Private Methods"
 
-	Private Sub ReadEvents(ByVal aSequence As SourceMdlSequenceDesc10)
+	Private Sub ReadEvents(ByVal aSequence As SourceMdlSequenceDesc09)
 		If aSequence.eventCount > 0 Then
 			'Dim sequenceInputFileStreamPosition As Long
 			'Dim inputFileStreamPosition As Long
@@ -896,7 +899,7 @@ Public Class SourceMdlFile09
 		End If
 	End Sub
 
-	Private Sub ReadPivots(ByVal aSequence As SourceMdlSequenceDesc10)
+	Private Sub ReadPivots(ByVal aSequence As SourceMdlSequenceDesc09)
 		If aSequence.pivotCount > 0 Then
 			'Dim sequenceInputFileStreamPosition As Long
 			'Dim inputFileStreamPosition As Long
@@ -935,7 +938,7 @@ Public Class SourceMdlFile09
 		End If
 	End Sub
 
-	Private Sub ReadAnimationValues(ByVal animValuesInputFileStreamPosition As Long, ByVal frameCount As Integer, ByVal animValues As List(Of SourceMdlAnimationValue10))
+	Private Sub ReadAnimationValues(ByVal animValuesInputFileStreamPosition As Long, ByVal frameCount As Integer, ByVal animValues As List(Of SourceMdlAnimationValue09))
 		Dim fileOffsetStart As Long
 		Dim fileOffsetEnd As Long
 		Dim frameCountRemainingToBeChecked As Integer
@@ -947,7 +950,7 @@ Public Class SourceMdlFile09
 
 		frameCountRemainingToBeChecked = frameCount
 		While (frameCountRemainingToBeChecked > 0)
-			Dim animValue As New SourceMdlAnimationValue10()
+			Dim animValue As New SourceMdlAnimationValue09()
 			animValue.value = Me.theInputFileReader.ReadInt16()
 			currentTotal = animValue.total
 			If currentTotal = 0 Then
@@ -959,7 +962,7 @@ Public Class SourceMdlFile09
 
 			validCount = animValue.valid
 			For i As Integer = 1 To validCount
-				Dim animValue2 As New SourceMdlAnimationValue10()
+				Dim animValue2 As New SourceMdlAnimationValue09()
 				animValue2.value = Me.theInputFileReader.ReadInt16()
 				animValues.Add(animValue2)
 			Next

@@ -458,7 +458,7 @@ Public Class SourceQcFile09
 
 	Public Sub WriteSequenceCommands()
 		Dim line As String = ""
-		Dim aSequence As SourceMdlSequenceDesc10
+		Dim aSequence As SourceMdlSequenceDesc09
 
 		If Me.theMdlFileData.theSequences IsNot Nothing AndAlso Me.theMdlFileData.theSequences.Count > 0 Then
 			Me.theOutputFileStreamWriter.WriteLine()
@@ -670,7 +670,7 @@ Public Class SourceQcFile09
 	'  transition
 	'  [X, Y, Z, XR, YR, ZR, LX, LY, LZ, AX, AY, AZ, AXR, AYR, AZR]
 	'/  ["smdFileName"]
-	Private Sub WriteSequenceOptions(ByVal aSequenceDesc As SourceMdlSequenceDesc10)
+	Private Sub WriteSequenceOptions(ByVal aSequenceDesc As SourceMdlSequenceDesc09)
 		Dim line As String = ""
 
 		For blendIndex As Integer = 0 To aSequenceDesc.blendCount - 1
@@ -783,7 +783,7 @@ Public Class SourceQcFile09
 		'End If
 	End Sub
 
-	Private Sub WriteSequenceNodeInfo(ByVal aSeqDesc As SourceMdlSequenceDesc10)
+	Private Sub WriteSequenceNodeInfo(ByVal aSeqDesc As SourceMdlSequenceDesc09)
 		Dim line As String = ""
 
 		If aSeqDesc.entryNodeIndex > 0 Then

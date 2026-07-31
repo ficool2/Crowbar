@@ -129,7 +129,10 @@
     <Compile Include="Core\GameModel\SourceCommon\SourceMdlFileData\SourceMdlAnimTag.vb" />
     <Compile Include="Core\GameModel\SourceGlobal\SourceTextureCoordinates.vb" />
     <Compile Include="Core\GameModel\SourceModel09\SourceMdlFile09.vb" />
+    <Compile Include="Core\GameModel\SourceModel09\SourceMdlFileData\SourceMdlAnimation09.vb" />
+    <Compile Include="Core\GameModel\SourceModel09\SourceMdlFileData\SourceMdlAnimationValue09.vb" />
     <Compile Include="Core\GameModel\SourceModel09\SourceMdlFileData\SourceMdlFileData09.vb" />
+    <Compile Include="Core\GameModel\SourceModel09\SourceMdlFileData\SourceMdlSequenceDesc09.vb" />
     <Compile Include="Core\GameModel\SourceModel09\SourceModel09.vb" />
     <Compile Include="Core\GameModel\SourceModel09\SourceQcFile09.vb" />
     <Compile Include="Core\GameModel\SourceModel09\SourceSmdFile09.vb" />

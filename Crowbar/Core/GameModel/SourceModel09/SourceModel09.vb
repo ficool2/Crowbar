@@ -273,7 +273,7 @@ Public Class SourceModel09
 	Public Overrides Function WriteBoneAnimationSmdFiles(ByVal modelOutputPath As String) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
-		Dim aSequenceDesc As SourceMdlSequenceDesc10
+		Dim aSequenceDesc As SourceMdlSequenceDesc09
 		Dim smdPath As String
 		'Dim smdFileName As String
 		Dim smdPathFileName As String
@@ -359,7 +359,7 @@ Public Class SourceModel09
 		Return status
 	End Function
 
-	Public Overloads Function WriteBoneAnimationSmdFile(ByVal smdPathFileName As String, ByVal aSequence As SourceMdlSequenceDesc10, ByVal blendIndex As Integer) As AppEnums.StatusMessage
+	Public Overloads Function WriteBoneAnimationSmdFile(ByVal smdPathFileName As String, ByVal aSequence As SourceMdlSequenceDesc09, ByVal blendIndex As Integer) As AppEnums.StatusMessage
 		Dim status As AppEnums.StatusMessage = StatusMessage.Success
 
 		Try

@@ -106,7 +106,7 @@
 	'Public theBones As List(Of SourceMdlBone10Single)
 	Public theBoneControllers As List(Of SourceMdlBoneController10)
 	Public theHitboxes As List(Of SourceMdlHitbox10)
-	Public theSequences As List(Of SourceMdlSequenceDesc10)
+	Public theSequences As List(Of SourceMdlSequenceDesc09)
 	Public theSequenceGroupFileHeaders As List(Of SourceMdlSequenceGroupFileHeader10)
 	Public theSequenceGroups As List(Of SourceMdlSequenceGroup10)
 	Public theSkinFamilies As List(Of List(Of Short))
