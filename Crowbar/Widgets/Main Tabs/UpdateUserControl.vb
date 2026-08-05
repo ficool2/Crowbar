@@ -31,7 +31,20 @@ Public Class UpdateUserControl
 		AddHandler Me.UpdateFolderTextBox.DataBindings("Text").Parse, AddressOf FileManager.ParsePathFileName
 
 		Me.CurrentVersionLabel.Text = "Current Version: " + My.Application.Info.Version.ToString(2)
+
+		If Not UpdateUserControl.UpdateCheckingIsEnabled Then
+			Me.CheckForUpdateTextBox.Text = UpdateUserControl.UpdateCheckingIsDisabledMessage
+			Me.CheckForUpdateButton.Enabled = False
+			Me.CancelCheckButton.Enabled = False
+			Me.DownloadButton.Enabled = False
+			Me.CancelDownloadButton.Enabled = False
+			Me.UpdateButton.Enabled = False
+			Me.CancelUpdateButton.Enabled = False
+		End If
 	End Sub
+
+	Public Const UpdateCheckingIsEnabled As Boolean = False
+	Public Const UpdateCheckingIsDisabledMessage As String = "Update checking is disabled."
 
 	' Do not need Free() because this widget is destroyed only on program exit.
 	'Protected Overrides Sub Free()
@@ -50,6 +63,11 @@ Public Class UpdateUserControl
 #Region "Methods"
 
 	Public Sub CheckForUpdate()
+		If Not UpdateUserControl.UpdateCheckingIsEnabled Then
+			Me.CheckForUpdateTextBox.Text = UpdateUserControl.UpdateCheckingIsDisabledMessage
+			Exit Sub
+		End If
+
 		Me.CheckForUpdateTextBox.Text = "Checking for update..."
 		Me.UpdateCommandWidgets(True)
 		Me.CancelCheckButton.Enabled = True
@@ -266,6 +284,12 @@ Public Class UpdateUserControl
 	End Sub
 
 	Private Sub Download()
+		If Not UpdateUserControl.UpdateCheckingIsEnabled Then
+			Me.DownloadProgressBarEx.Text = UpdateUserControl.UpdateCheckingIsDisabledMessage
+			Me.DownloadProgressBarEx.Value = 0
+			Exit Sub
+		End If
+
 		If FileManager.PathExistsAfterTryToCreate(TheApp.Settings.UpdateDownloadPath) Then
 			Me.DownloadProgressBarEx.Text = "Checking for update..."
 			Me.DownloadProgressBarEx.Value = 0
@@ -315,6 +339,12 @@ Public Class UpdateUserControl
 
 	' Named UpdateApp to avoid confusion with existing UserControl.Update().
 	Private Sub UpdateApp()
+		If Not UpdateUserControl.UpdateCheckingIsEnabled Then
+			Me.UpdateProgressBarEx.Text = UpdateUserControl.UpdateCheckingIsDisabledMessage
+			Me.UpdateProgressBarEx.Value = 0
+			Exit Sub
+		End If
+
 		Me.UpdateProgressBarEx.Text = "Checking for update..."
 		Me.UpdateProgressBarEx.Value = 0
 		Me.theCurrentProgressBar = Me.UpdateProgressBarEx
@@ -335,6 +365,10 @@ Public Class UpdateUserControl
 	End Sub
 
 	Private Sub UpdateCommandWidgets(ByVal taskIsRunning As Boolean)
+		If Not UpdateUserControl.UpdateCheckingIsEnabled Then
+			Exit Sub
+		End If
+
 		Me.CheckForUpdateButton.Enabled = Not taskIsRunning
 		'Me.CancelCheckButton.Enabled = taskIsRunning
 

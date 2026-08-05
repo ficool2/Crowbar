@@ -111,7 +111,7 @@ Public Class MainForm
 		AddHandler Me.PublishUserControl1.UseInDownloadToolStripMenuItem.Click, AddressOf Me.PublishUserControl1_UseInDownloadToolStripMenuItem_Click
 		AddHandler Me.UpdateUserControl1.UpdateAvailable, AddressOf Me.UpdateUserControl1_UpdateAvailable
 
-		Me.UpdateUserControl1.CheckForUpdate()
+		'Me.UpdateUserControl1.CheckForUpdate()
 	End Sub
 
 	Private Sub Free()
