@@ -538,9 +538,11 @@ Partial Class CompileUserControl
 		'
 		'CompileLogRichTextBox
 		'
+		Me.CompileLogRichTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(12, Byte), Integer), CType(CType(12, Byte), Integer))
 		Me.CompileLogRichTextBox.CueBannerText = ""
+		Me.CompileLogRichTextBox.ForeColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer))
 		Me.CompileLogRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.CompileLogRichTextBox.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.CompileLogRichTextBox.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CompileLogRichTextBox.HideSelection = False
 		Me.CompileLogRichTextBox.Location = New System.Drawing.Point(0, 26)
 		Me.CompileLogRichTextBox.Name = "CompileLogRichTextBox"

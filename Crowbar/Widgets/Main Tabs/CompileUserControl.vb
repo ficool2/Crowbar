@@ -436,14 +436,42 @@ Public Class CompileUserControl
 		'End If
 		If e.ProgressPercentage = 0 Then
 			Me.CompileLogRichTextBox.Text = ""
-			Me.CompileLogRichTextBox.AppendText(line + vbCr)
+			Me.AppendCompileLogLine(line)
 			Me.UpdateWidgets(True)
 		ElseIf e.ProgressPercentage = 1 Then
-			Me.CompileLogRichTextBox.AppendText(line + vbCr)
+			Me.AppendCompileLogLine(line)
 		ElseIf e.ProgressPercentage = 100 Then
-			Me.CompileLogRichTextBox.AppendText(line + vbCr)
+			Me.AppendCompileLogLine(line)
 		End If
 	End Sub
+
+	' The compiler colors its console output with the Win32 console API
+	' those colors do not survive being redirected into a pipe
+	' Give the line the color the compiler would have used
+	Private Sub AppendCompileLogLine(ByVal line As String)
+		Dim lineColor As Color = Me.GetCompileLogLineColor(line)
+
+		Me.CompileLogRichTextBox.SelectionStart = Me.CompileLogRichTextBox.TextLength
+		Me.CompileLogRichTextBox.SelectionLength = 0
+		Me.CompileLogRichTextBox.SelectionColor = lineColor
+		Me.CompileLogRichTextBox.AppendText(line + vbCr)
+		Me.CompileLogRichTextBox.SelectionColor = Me.CompileLogRichTextBox.ForeColor
+	End Sub
+
+	Private Function GetCompileLogLineColor(ByVal line As String) As Color
+		Dim trimmedLine As String = line.TrimStart()
+
+		If trimmedLine.StartsWith("ERROR", StringComparison.OrdinalIgnoreCase) _
+		 OrElse trimmedLine.StartsWith("CRITICAL", StringComparison.OrdinalIgnoreCase) _
+		 OrElse trimmedLine.StartsWith("Error:", StringComparison.OrdinalIgnoreCase) Then
+			Return Color.FromArgb(255, 85, 85)
+		ElseIf trimmedLine.StartsWith("WARNING", StringComparison.OrdinalIgnoreCase) _
+		 OrElse trimmedLine.StartsWith("Warning:", StringComparison.OrdinalIgnoreCase) Then
+			Return Color.FromArgb(245, 200, 65)
+		End If
+
+		Return Me.CompileLogRichTextBox.ForeColor
+	End Function
 
 	Private Sub CompilerBackgroundWorker_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
 		Dim statusText As String
