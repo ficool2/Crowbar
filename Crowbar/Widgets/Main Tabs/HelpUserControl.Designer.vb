@@ -118,7 +118,7 @@ Partial Class HelpUserControl
 		Me.Label4.Name = "Label4"
 		Me.Label4.Size = New System.Drawing.Size(407, 24)
 		Me.Label4.TabIndex = 8
-		Me.Label4.Text = "Ways to use Crowbar that might not be obvious."
+		Me.Label4.Text = "Ways to use Crowbar++ that might not be obvious."
 		'
 		'Label3
 		'
@@ -158,7 +158,7 @@ Partial Class HelpUserControl
 		Me.Label5.Name = "Label5"
 		Me.Label5.Size = New System.Drawing.Size(577, 16)
 		Me.Label5.TabIndex = 7
-		Me.Label5.Text = "Crowbar allows you to quickly access many tools for modding models for Source-eng" & _
+		Me.Label5.Text = "Crowbar++ allows you to quickly access many tools for modding models for Source-eng" & _
 	"ine games."
 		Me.Label5.Visible = False
 		'

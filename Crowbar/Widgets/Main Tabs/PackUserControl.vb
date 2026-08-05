@@ -556,7 +556,7 @@ Public Class PackUserControl
 
 #Region "Data"
 
-	Private theWarningMessgeAboutInvalidJsonFormat As String = "WARNING: The addon.json file is invalid json format. Crowbar will overwrite the file with current options."
+	Private theWarningMessgeAboutInvalidJsonFormat As String = "WARNING: The addon.json file is invalid json format. Crowbar++ will overwrite the file with current options."
 	Private theSelectedPackerOptions As List(Of String)
 	Private thePackedRelativePathFileNames As BindingListEx(Of String)
 	Private theGmaGarrysModTagsUserControlIsBeingChangedByMe As Boolean

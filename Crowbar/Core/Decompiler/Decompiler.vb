@@ -289,7 +289,7 @@ Public Class Decompiler
 			'	Me.CreateLogTextFile(mdlPathFileName)
 			'Catch ex As Exception
 			'	Me.UpdateProgress()
-			'	Me.UpdateProgress(2, "ERROR: Crowbar tried to write the decompile log file but the system gave this message: " + ex.Message)
+			'	Me.UpdateProgress(2, "ERROR: Crowbar++ tried to write the decompile log file but the system gave this message: " + ex.Message)
 			'	status = StatusMessage.Error
 			'	Return status
 			'End Try
@@ -327,7 +327,7 @@ Public Class Decompiler
 				Return status
 			Catch ex As Exception
 				'Me.UpdateProgress(2, "ERROR: " + ex.Message)
-				Me.UpdateProgress(2, "Crowbar tried to read the MDL file but the system gave this message: " + ex.Message)
+				Me.UpdateProgress(2, "Crowbar++ tried to read the MDL file but the system gave this message: " + ex.Message)
 				Me.UpdateProgress(1, "... Decompiling """ + mdlRelativePathFileName + """ FAILED.")
 				status = StatusMessage.Error
 				Return status
@@ -502,7 +502,7 @@ Public Class Decompiler
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()
-				Me.UpdateProgress(2, "ERROR: Crowbar tried to write the decompile log file but the system gave this message: " + ex.Message)
+				Me.UpdateProgress(2, "ERROR: Crowbar++ tried to write the decompile log file but the system gave this message: " + ex.Message)
 				status = StatusMessage.Error
 			End Try
 		Else

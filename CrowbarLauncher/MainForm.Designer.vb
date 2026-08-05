@@ -35,7 +35,7 @@ Partial Class MainForm
 		Me.TextBox1.ReadOnly = True
 		Me.TextBox1.Size = New System.Drawing.Size(268, 13)
 		Me.TextBox1.TabIndex = 0
-		Me.TextBox1.Text = "Updating Crowbar."
+		Me.TextBox1.Text = "Updating Crowbar++."
 		'
 		'TextBox2
 		'
@@ -60,7 +60,7 @@ Partial Class MainForm
 		Me.Name = "MainForm"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Crowbar Launcher"
+		Me.Text = "Crowbar++ Launcher"
 		Me.TopMost = True
 		Me.ResumeLayout(False)
 		Me.PerformLayout()

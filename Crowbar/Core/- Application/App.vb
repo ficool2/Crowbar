@@ -282,8 +282,8 @@ Public Class App
 		'NOTE: Using Path.Combine in case theStartupFolder is a root folder, like "C:\".
 		customDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ZeqMacaw")
 		customDataPath += Path.DirectorySeparatorChar
-		'customDataPath += "Crowbar"
-		customDataPath += My.Application.Info.ProductName
+		'NOTE: Uses the internal name, not the displayed product name, so the data folder location does not change.
+		customDataPath += "Crowbar"
 		customDataPath += " "
 		customDataPath += My.Application.Info.Version.ToString(2)
 

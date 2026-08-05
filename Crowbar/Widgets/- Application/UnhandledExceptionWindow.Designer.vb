@@ -34,7 +34,7 @@ Partial Class UnhandledExceptionWindow
 		Me.ExitButton.Name = "ExitButton"
 		Me.ExitButton.Size = New System.Drawing.Size(90, 23)
 		Me.ExitButton.TabIndex = 4
-		Me.ExitButton.Text = "Exit Crowbar"
+		Me.ExitButton.Text = "Exit Crowbar++"
 		'
 		'CopyErrorReportButton
 		'
@@ -94,7 +94,7 @@ Partial Class UnhandledExceptionWindow
 		Me.Name = "UnhandledExceptionWindow"
 		Me.ShowInTaskbar = False
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-		Me.Text = "Crowbar Internal Error"
+		Me.Text = "Crowbar++ Internal Error"
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 

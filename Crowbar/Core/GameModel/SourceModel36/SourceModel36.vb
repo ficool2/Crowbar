@@ -315,7 +315,7 @@ Public Class SourceModel36
 						Me.WriteVertexAnimationVtaFile(Nothing)
 					Catch ex As PathTooLongException
 						Dim debug As Integer = 4242
-						'status = "ERROR: Crowbar tried to create """ + vtaPathFileName + """ but the system gave this message: " + ex.Message
+						'status = "ERROR: Crowbar++ tried to create """ + vtaPathFileName + """ but the system gave this message: " + ex.Message
 					Catch ex As Exception
 						Dim debug As Integer = 4242
 					Finally

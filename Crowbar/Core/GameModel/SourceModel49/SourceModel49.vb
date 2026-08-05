@@ -944,7 +944,7 @@ Public Class SourceModel49
 				Dim debug As Integer = 4242
 			End Try
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		Finally

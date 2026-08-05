@@ -3249,7 +3249,7 @@ Public Class SourceQcFile49
 		Dim line As String = ""
 
 		line = vbTab
-		line += "// Crowbar writes this subtract option to prevent jigglebone and poseparameter problems when delta sequences are recompiled."
+		line += "// Crowbar++ writes this subtract option to prevent jigglebone and poseparameter problems when delta sequences are recompiled."
 		Me.theOutputFileStreamWriter.WriteLine(line)
 
 		line = vbTab

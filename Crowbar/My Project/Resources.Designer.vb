@@ -319,7 +319,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Possible causes: The game&apos;s SDK or Authoring Tools has not been installed (usually via Steam Library Tools) or the path given to Crowbar (via Set Up Games button) is incorrect..
+        '''  Looks up a localized string similar to Possible causes: The game&apos;s SDK or Authoring Tools has not been installed (usually via Steam Library Tools) or the path given to Crowbar++ (via Set Up Games button) is incorrect..
         '''</summary>
         Friend ReadOnly Property ErrorMessageSDKMissingCause() As String
             Get

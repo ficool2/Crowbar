@@ -117,7 +117,7 @@ Partial Class OptionsUserControl
 		Me.IntegrateContextMenuItemsCheckBox.Name = "IntegrateContextMenuItemsCheckBox"
 		Me.IntegrateContextMenuItemsCheckBox.Size = New System.Drawing.Size(223, 17)
 		Me.IntegrateContextMenuItemsCheckBox.TabIndex = 0
-		Me.IntegrateContextMenuItemsCheckBox.Text = "Integrate Crowbar context menu items"
+		Me.IntegrateContextMenuItemsCheckBox.Text = "Integrate Crowbar++ context menu items"
 		Me.IntegrateContextMenuItemsCheckBox.UseVisualStyleBackColor = True
 		'
 		'Label1
@@ -136,7 +136,7 @@ Partial Class OptionsUserControl
 		Me.IntegrateAsSubmenuCheckBox.Name = "IntegrateAsSubmenuCheckBox"
 		Me.IntegrateAsSubmenuCheckBox.Size = New System.Drawing.Size(202, 17)
 		Me.IntegrateAsSubmenuCheckBox.TabIndex = 4
-		Me.IntegrateAsSubmenuCheckBox.Text = "Integrate as a ""Crowbar"" submenu"
+		Me.IntegrateAsSubmenuCheckBox.Text = "Integrate as a ""Crowbar++"" submenu"
 		Me.IntegrateAsSubmenuCheckBox.UseVisualStyleBackColor = True
 		'
 		'GroupBox1
@@ -248,7 +248,7 @@ Partial Class OptionsUserControl
 		Me.OptionsContextMenuOpenWithCrowbarCheckBox.Name = "OptionsContextMenuOpenWithCrowbarCheckBox"
 		Me.OptionsContextMenuOpenWithCrowbarCheckBox.Size = New System.Drawing.Size(128, 17)
 		Me.OptionsContextMenuOpenWithCrowbarCheckBox.TabIndex = 0
-		Me.OptionsContextMenuOpenWithCrowbarCheckBox.Text = "Open with Crowbar"
+		Me.OptionsContextMenuOpenWithCrowbarCheckBox.Text = "Open with Crowbar++"
 		Me.OptionsContextMenuOpenWithCrowbarCheckBox.UseVisualStyleBackColor = True
 		'
 		'ContextMenuUseDefaultsButton
@@ -487,7 +487,7 @@ Partial Class OptionsUserControl
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(188, 83)
 		Me.Label2.TabIndex = 14
-		Me.Label2.Text = "Change the default program to Crowbar for the following file extensions and which" &
+		Me.Label2.Text = "Change the default program to Crowbar++ for the following file extensions and which" &
 	" tab to set up. This includes when files or folders are dragged onto the ""Crowba" &
 	"r.exe"" file."
 		'
@@ -828,8 +828,8 @@ Partial Class OptionsUserControl
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(188, 83)
 		Me.Label3.TabIndex = 19
-		Me.Label3.Text = "Choose which tabs Crowbar sets up and which tab opens when a file or folder is dr" &
-	"opped on Crowbar. Dropping on any tab left unset below will only set up that tab" &
+		Me.Label3.Text = "Choose which tabs Crowbar++ sets up and which tab opens when a file or folder is dr" &
+	"opped on Crowbar++. Dropping on any tab left unset below will only set up that tab" &
 	"."
 		'
 		'DragAndDropUseDefaultsButton
@@ -936,7 +936,7 @@ Partial Class OptionsUserControl
 		Me.SingleInstanceCheckBox.Name = "SingleInstanceCheckBox"
 		Me.SingleInstanceCheckBox.Size = New System.Drawing.Size(336, 17)
 		Me.SingleInstanceCheckBox.TabIndex = 4
-		Me.SingleInstanceCheckBox.Text = "Restrict to single instance (only one Crowbar open at a time)"
+		Me.SingleInstanceCheckBox.Text = "Restrict to single instance (only one Crowbar++ open at a time)"
 		Me.SingleInstanceCheckBox.UseVisualStyleBackColor = True
 		'
 		'OptionsUserControl

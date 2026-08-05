@@ -463,7 +463,7 @@ Public MustInherit Class SourceModel
 
 			Me.WriteMeshSmdFile(lodIndex, aVtxModel, aModel, bodyPartVertexIndexStart)
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As ArgumentException
 			Dim debug As Integer = 4242
 		Catch ex As NotSupportedException
@@ -506,7 +506,7 @@ Public MustInherit Class SourceModel
 
 			Me.WriteBoneAnimationSmdFile(aSequenceDesc, anAnimationDesc)
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + smdPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		Finally
@@ -529,7 +529,7 @@ Public MustInherit Class SourceModel
 
 			Me.WriteVertexAnimationVtaFile(bodyPart)
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + vtaPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + vtaPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		Finally
@@ -817,7 +817,7 @@ Public MustInherit Class SourceModel
 
 			writeTextFileAction.Invoke()
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + outputPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + outputPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		Finally
@@ -844,7 +844,7 @@ Public MustInherit Class SourceModel
 			debugFile.WriteHeaderComment()
 			debugFile.WriteFileSeekLog(fileSeekLog)
 		Catch ex As PathTooLongException
-			status = "ERROR: Crowbar tried to create """ + debugPathFileName + """ but the system gave this message: " + ex.Message
+			status = "ERROR: Crowbar++ tried to create """ + debugPathFileName + """ but the system gave this message: " + ex.Message
 		Catch ex As Exception
 			Dim debug As Integer = 4242
 		Finally

@@ -324,7 +324,7 @@ Public Class Unpacker
 	End Sub
 
 	Private Sub WriteErrorMessage(ByVal indentLevel As Integer, ByVal line As String)
-		Me.UpdateProgress(indentLevel, "Crowbar ERROR: " + line)
+		Me.UpdateProgress(indentLevel, "Crowbar++ ERROR: " + line)
 	End Sub
 
 	Private Sub UpdateProgress(ByVal indentLevel As Integer, ByVal line As String)
@@ -397,7 +397,7 @@ Public Class Unpacker
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()
-				Me.UpdateProgress(2, "ERROR: Crowbar tried to write the unpack log file but the system gave this message: " + ex.Message)
+				Me.UpdateProgress(2, "ERROR: Crowbar++ tried to write the unpack log file but the system gave this message: " + ex.Message)
 				status = StatusMessage.Error
 			End Try
 		Else

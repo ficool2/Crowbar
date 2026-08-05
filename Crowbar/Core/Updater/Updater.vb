@@ -101,7 +101,7 @@ Public Class Updater
 						'Dim appVersionIsOlder As Boolean = appVersion < My.Application.Info.Version
 						'Dim appVersionIsEqual As Boolean = appVersion = My.Application.Info.Version
 
-						bw.ReportProgress(0, "Crowbar " + appVersionTag + vbCrLf + CType(root("body"), String))
+						bw.ReportProgress(0, "Crowbar++ " + appVersionTag + vbCrLf + CType(root("body"), String))
 					Else
 						Me.theAppVersion = Nothing
 					End If
@@ -142,13 +142,13 @@ Public Class Updater
 		ElseIf Me.theAppVersion Is Nothing OrElse Me.theRemoteFileLink = "" Then
 			updateCheckStatusMessage = "Unable to get update info. Please try again later."
 		ElseIf Me.theAppVersion = My.Application.Info.Version Then
-			updateCheckStatusMessage = "Crowbar is up to date."
+			updateCheckStatusMessage = "Crowbar++ is up to date."
 		ElseIf Me.theAppVersion > My.Application.Info.Version Then
 			updateCheckStatusMessage = "Update to version " + Me.theAppVersion.ToString(2) + " available.   Size: " + MathModule.BinaryByteUnitsConversion(fileSize)
 			outputInfo.UpdateIsAvailable = True
 		Else
 			'NOTE: Should not get here if versioning is done correctly.
-			updateCheckStatusMessage = "Crowbar is up to date."
+			updateCheckStatusMessage = "Crowbar++ is up to date."
 		End If
 		Dim now As DateTime = DateTime.Now()
 		Dim lastCheckedMessage As String = "   Last checked: " + now.ToLongDateString() + " " + now.ToShortTimeString()
@@ -264,7 +264,7 @@ Public Class Updater
 			sevenZrExeProcess.Start()
 			sevenZrExeProcess.WaitForExit()
 		Catch ex As Exception
-			Throw New System.Exception("Crowbar tried to decompress the file """ + Me.theLocalPathFileName + """ but Windows gave this message: " + ex.Message)
+			Throw New System.Exception("Crowbar++ tried to decompress the file """ + Me.theLocalPathFileName + """ but Windows gave this message: " + ex.Message)
 		Finally
 			sevenZrExeProcess.Close()
 		End Try
@@ -317,7 +317,7 @@ Public Class Updater
 				Application.Exit()
 			Catch ex As Exception
 				Dim debug As Integer = 4242
-				'Throw New System.Exception("Crowbar tried to open new version but Windows gave this message: " + ex.Message)
+				'Throw New System.Exception("Crowbar++ tried to open new version but Windows gave this message: " + ex.Message)
 			Finally
 			End Try
 		End If

@@ -269,7 +269,7 @@ Partial Class UpdateUserControl
 		Me.UpdateGroupBox.Size = New System.Drawing.Size(776, 95)
 		Me.UpdateGroupBox.TabIndex = 7
 		Me.UpdateGroupBox.TabStop = False
-		Me.UpdateGroupBox.Text = "Update - Update current version to latest version - Crowbar will close and reopen" &
+		Me.UpdateGroupBox.Text = "Update - Update current version to latest version - Crowbar++ will close and reopen" &
 	""
 		'
 		'CancelUpdateButton

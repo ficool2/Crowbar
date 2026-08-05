@@ -664,7 +664,7 @@ Public Class DownloadUserControl
 		Try
 			FileManager.CreatePath(outputPath)
 		Catch ex As Exception
-			Me.LogTextBox.AppendText("Crowbar tried to create folder path """ + outputPath + """, but Windows gave this message: " + ex.Message + vbCrLf)
+			Me.LogTextBox.AppendText("Crowbar++ tried to create folder path """ + outputPath + """, but Windows gave this message: " + ex.Message + vbCrLf)
 			Exit Sub
 		End Try
 

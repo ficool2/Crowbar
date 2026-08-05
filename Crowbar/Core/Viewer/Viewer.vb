@@ -397,7 +397,7 @@ Public Class Viewer
 				End If
 				File.Copy(Me.theInputMdlPathFileName, replacementMdlPathFileName)
 			Catch ex As Exception
-				Me.WriteErrorMessage("Crowbar tried to copy the file """ + Me.theInputMdlPathFileName + """ to """ + replacementMdlPathFileName + """ but Windows gave this message: " + ex.Message)
+				Me.WriteErrorMessage("Crowbar++ tried to copy the file """ + Me.theInputMdlPathFileName + """ to """ + replacementMdlPathFileName + """ but Windows gave this message: " + ex.Message)
 			End Try
 
 			If File.Exists(replacementMdlPathFileName) Then
@@ -415,7 +415,7 @@ Public Class Viewer
 				Catch ex As FormatException
 					Me.WriteErrorMessage(ex.Message)
 				Catch ex As Exception
-					Me.WriteErrorMessage("Crowbar tried to write to the temporary replacement MDL file but the system gave this message: " + ex.Message)
+					Me.WriteErrorMessage("Crowbar++ tried to write to the temporary replacement MDL file but the system gave this message: " + ex.Message)
 					Return ""
 				End Try
 
@@ -437,12 +437,12 @@ Public Class Viewer
 						End If
 						Me.theModelFilesForViewAsReplacement.Add(targetPathFileName)
 					Catch ex As Exception
-						Me.WriteErrorMessage("Crowbar tried to copy the file """ + inputPathFileName + """ to """ + targetPathFileName + """ but Windows gave this message: " + ex.Message)
+						Me.WriteErrorMessage("Crowbar++ tried to copy the file """ + inputPathFileName + """ to """ + targetPathFileName + """ but Windows gave this message: " + ex.Message)
 					End Try
 				Next
 			End If
 		Else
-			Me.WriteErrorMessage("Crowbar tried to create """ + gameModelsTempPath + """, but it failed.")
+			Me.WriteErrorMessage("Crowbar++ tried to create """ + gameModelsTempPath + """, but it failed.")
 			replacementMdlRelativePathFileName = ""
 		End If
 
@@ -517,7 +517,7 @@ Public Class Viewer
 					My.Computer.FileSystem.CopyDirectory(inputMaterialsPath, gameMaterialsPath)
 					Me.theGameMaterialsFolder = gameMaterialsPath
 				Else
-					'errorMessage = "Crowbar tried to create """ + gameMaterialsPath + """, but it failed."
+					'errorMessage = "Crowbar++ tried to create """ + gameMaterialsPath + """, but it failed."
 				End If
 			Catch ex As Exception
 				Dim debug As Integer = 4242

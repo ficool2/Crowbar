@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>An internal error occurred. Crowbar will now exit to prevent corruption to user data. Apologies for the inconvenience.
+    <value>An internal error occurred. Crowbar++ will now exit to prevent corruption to user data. Apologies for the inconvenience.
 
 To report this bug:
 Please copy the text in the "Error Report" box below.
-Go to Crowbar's Bug Report forum and click "Start a New Discussion" button.
+Go to Crowbar++'s Bug Report forum and click "Start a New Discussion" button.
 Paste the text into the body of the post and enter a useful title for the post, such as "[BUG] Error after pressing Decompile button".
 At the designated sections in the pasted text, write what you tried to do and what you expected to happen.
 Click "Post Discussion" button to finish the bug report.

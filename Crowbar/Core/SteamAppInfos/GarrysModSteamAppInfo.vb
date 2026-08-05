@@ -48,7 +48,7 @@ Public Class GarrysModSteamAppInfo
 					bw.ReportProgress(0, "Renamed """ + Path.GetFileName(givenPathFileName) + """ to """ + Path.GetFileName(processedGivenPathFileName) + """" + vbCrLf)
 				End If
 			Catch ex As Exception
-				bw.ReportProgress(0, "Crowbar tried to rename the file """ + Path.GetFileName(givenPathFileName) + """ to """ + Path.GetFileName(processedGivenPathFileName) + """ but Windows gave this message: " + ex.Message)
+				bw.ReportProgress(0, "Crowbar++ tried to rename the file """ + Path.GetFileName(givenPathFileName) + """ to """ + Path.GetFileName(processedGivenPathFileName) + """ but Windows gave this message: " + ex.Message)
 			End Try
 
 			processedPathFileName = Path.ChangeExtension(processedGivenPathFileName, ".gma")
@@ -72,7 +72,7 @@ Public Class GarrysModSteamAppInfo
 				lzmaExeProcess.Start()
 				lzmaExeProcess.WaitForExit()
 			Catch ex As Exception
-				Throw New System.Exception("Crowbar tried to decompress the file """ + processedGivenPathFileName + """ to """ + processedPathFileName + """ but Windows gave this message: " + ex.Message)
+				Throw New System.Exception("Crowbar++ tried to decompress the file """ + processedGivenPathFileName + """ to """ + processedPathFileName + """ but Windows gave this message: " + ex.Message)
 			Finally
 				lzmaExeProcess.Close()
 				bw.ReportProgress(0, "Decompress done." + vbCrLf)
@@ -84,7 +84,7 @@ Public Class GarrysModSteamAppInfo
 					bw.ReportProgress(0, "Deleted: """ + processedGivenPathFileName + """" + vbCrLf)
 				End If
 			Catch ex As Exception
-				bw.ReportProgress(0, "Crowbar tried to delete the file """ + processedGivenPathFileName + """ but Windows gave this message: " + ex.Message)
+				bw.ReportProgress(0, "Crowbar++ tried to delete the file """ + processedGivenPathFileName + """ but Windows gave this message: " + ex.Message)
 			End Try
 		End If
 
@@ -105,7 +105,7 @@ Public Class GarrysModSteamAppInfo
 		Try
 			FileManager.CreatePath(Me.theTempCrowbarPath)
 		Catch ex As Exception
-			Throw New System.Exception("Crowbar tried to create folder path """ + Me.theTempCrowbarPath + """, but Windows gave this message: " + ex.Message)
+			Throw New System.Exception("Crowbar++ tried to create folder path """ + Me.theTempCrowbarPath + """, but Windows gave this message: " + ex.Message)
 		End Try
 
 		Dim gmaPathFileName As String
@@ -168,21 +168,21 @@ Public Class GarrysModSteamAppInfo
 							gmadExeProcess.WaitForExit()
 							'gmadExeProcess.Close()
 						Catch ex As Exception
-							Throw New System.Exception("Crowbar tried to create the file """ + gmaPathFileName + """ with Garry's Mod gmad.exe, but got this error message: " + ex.Message)
+							Throw New System.Exception("Crowbar++ tried to create the file """ + gmaPathFileName + """ with Garry's Mod gmad.exe, but got this error message: " + ex.Message)
 						Finally
 							gmadExeProcess.Close()
 							RemoveHandler gmadExeProcess.OutputDataReceived, AddressOf Me.myProcess_OutputDataReceived
 							RemoveHandler gmadExeProcess.ErrorDataReceived, AddressOf Me.myProcess_ErrorDataReceived
 
 							'If Not File.Exists(gmaPathFileName) Then
-							'	Throw New System.Exception("Crowbar tried to create the file """ + gmaPathFileName + """ with Garry's Mod gmad.exe, but the file was not created.")
+							'	Throw New System.Exception("Crowbar++ tried to create the file """ + gmaPathFileName + """ with Garry's Mod gmad.exe, but the file was not created.")
 							'End If
 						End Try
 					Else
-						Throw New System.Exception("Crowbar tried to create the file """ + addonJsonPathFileName + """, but the file was not created.")
+						Throw New System.Exception("Crowbar++ tried to create the file """ + addonJsonPathFileName + """, but the file was not created.")
 					End If
 				Else
-					Throw New System.Exception("Crowbar tried to run """ + garrysModGmadExe + """, but the file was not found. Note that Garry's Mod must be installed for this to work.")
+					Throw New System.Exception("Crowbar++ tried to run """ + garrysModGmadExe + """, but the file was not found. Note that Garry's Mod must be installed for this to work.")
 				End If
 			End If
 		Else
@@ -198,7 +198,7 @@ Public Class GarrysModSteamAppInfo
 			Try
 				Directory.Delete(Me.theTempCrowbarPath, True)
 			Catch ex As Exception
-				bw.ReportProgress(0, "Crowbar tried to delete its temp folder """ + Me.theTempCrowbarPath + """ but Windows gave this message: " + ex.Message)
+				bw.ReportProgress(0, "Crowbar++ tried to delete its temp folder """ + Me.theTempCrowbarPath + """ but Windows gave this message: " + ex.Message)
 			End Try
 		End If
 		Me.theTempCrowbarPath = ""
@@ -237,7 +237,7 @@ Public Class GarrysModSteamAppInfo
 				File.Delete(addonJsonPathFileName)
 			End If
 		Catch ex As Exception
-			Throw New System.Exception("Crowbar tried to delete an old temp file """ + addonJsonPathFileName + """ but Windows gave this message: " + ex.Message)
+			Throw New System.Exception("Crowbar++ tried to delete an old temp file """ + addonJsonPathFileName + """ but Windows gave this message: " + ex.Message)
 		End Try
 
 		' Remove the "Addon" tag because it should not go into the json file.

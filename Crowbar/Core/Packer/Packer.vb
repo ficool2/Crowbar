@@ -288,7 +288,7 @@ Public Class Packer
 					Me.WriteFilesToListFileInFolderRecursively(inputPath)
 				End If
 			Catch ex As Exception
-				Me.UpdateProgress(2, "ERROR: Crowbar tried to write the list file for multi-file VPK packing, but the system gave this message: " + ex.Message + vbCr)
+				Me.UpdateProgress(2, "ERROR: Crowbar++ tried to write the list file for multi-file VPK packing, but the system gave this message: " + ex.Message + vbCr)
 			Finally
 				If Me.theVpkMultiFileListFileStream IsNot Nothing Then
 					Me.theVpkMultiFileListFileStream.Flush()
@@ -448,7 +448,7 @@ Public Class Packer
 				Me.UpdateProgress(2, "CROWBAR: Moved package file """ + sourcePathFileName + """ to """ + Me.theOutputPath + """")
 			Catch ex As Exception
 				Me.UpdateProgress()
-				Me.UpdateProgress(2, "WARNING: Crowbar tried to move the file, """ + sourcePathFileName + """, to the output folder, but Windows complained with this message: " + ex.Message.Trim())
+				Me.UpdateProgress(2, "WARNING: Crowbar++ tried to move the file, """ + sourcePathFileName + """, to the output folder, but Windows complained with this message: " + ex.Message.Trim())
 				Me.UpdateProgress(2, "SOLUTION: Pack again (and hope Windows does not complain again) or move the file yourself.")
 				Me.UpdateProgress()
 			End Try
@@ -581,7 +581,7 @@ Public Class Packer
 				Try
 					FileManager.CreatePath(tempCrowbarPath)
 				Catch ex As Exception
-					Throw New System.Exception("Crowbar tried to create folder path """ + tempCrowbarPath + """, but Windows gave this message: " + ex.Message)
+					Throw New System.Exception("Crowbar++ tried to create folder path """ + tempCrowbarPath + """, but Windows gave this message: " + ex.Message)
 				End Try
 
 				listFileName = "crowbar_vpk_file_list.txt"
@@ -595,7 +595,7 @@ Public Class Packer
 
 				vpkResponseFileStream.Flush()
 			Catch ex As Exception
-				'Me.LogRichTextBox.AppendText("ERROR: Crowbar tried to write the VPK response file for multi-file VPK packing, but the system gave this message: " + ex.Message + vbCr)
+				'Me.LogRichTextBox.AppendText("ERROR: Crowbar++ tried to write the VPK response file for multi-file VPK packing, but the system gave this message: " + ex.Message + vbCr)
 			Finally
 				If vpkResponseFileStream IsNot Nothing Then
 					vpkResponseFileStream.Flush()
@@ -640,7 +640,7 @@ Public Class Packer
 				Me.theLogFileStream.Flush()
 			Catch ex As Exception
 				Me.UpdateProgress()
-				Me.UpdateProgress(2, "ERROR: Crowbar tried to write the pack log file but the system gave this message: " + ex.Message)
+				Me.UpdateProgress(2, "ERROR: Crowbar++ tried to write the pack log file but the system gave this message: " + ex.Message)
 				status = StatusMessage.Error
 			End Try
 		Else
@@ -663,7 +663,7 @@ Public Class Packer
 	End Sub
 
 	Private Sub WriteErrorMessage(ByVal indentLevel As Integer, ByVal line As String)
-		Me.UpdateProgress(indentLevel, "Crowbar ERROR: " + line)
+		Me.UpdateProgress(indentLevel, "Crowbar++ ERROR: " + line)
 	End Sub
 
 	Private Sub UpdateProgress(ByVal indentLevel As Integer, ByVal line As String)

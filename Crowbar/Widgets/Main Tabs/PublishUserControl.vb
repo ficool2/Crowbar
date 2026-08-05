@@ -1394,7 +1394,7 @@ Public Class PublishUserControl
 				Me.ItemPreviewImagePictureBox.Image.Save(previewImagePathFileName, anImageFormat)
 			Catch ex As Exception
 				If Not File.Exists(previewImagePathFileName) Then
-					Me.LogTextBox.AppendText("ERROR: Crowbar tried to save preview image to temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
+					Me.LogTextBox.AppendText("ERROR: Crowbar++ tried to save preview image to temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
 				End If
 			End Try
 			If File.Exists(previewImagePathFileName) Then
@@ -1439,7 +1439,7 @@ Public Class PublishUserControl
 			Try
 				File.Delete(previewImagePathFileName)
 			Catch ex As Exception
-				Me.LogTextBox.AppendText("ERROR: Crowbar tried to delete an old temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
+				Me.LogTextBox.AppendText("ERROR: Crowbar++ tried to delete an old temp file """ + previewImagePathFileName + """ but Windows gave this message: " + ex.Message)
 			End Try
 		End If
 	End Sub
