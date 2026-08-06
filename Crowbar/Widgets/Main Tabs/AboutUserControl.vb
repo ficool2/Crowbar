@@ -25,8 +25,8 @@ Public Class AboutUserControl
 		Me.ProductInfoTextBox.Text += My.Application.Info.Copyright + vbCrLf
 		Me.ProductInfoTextBox.Text += My.Application.Info.CompanyName
 
-		Me.AuthorLinkLabel.Text = My.Application.Info.CompanyName
-		Me.AuthorLinkLabel.Links.Add(0, My.Application.Info.CompanyName.Length(), My.Resources.About_AuthorLink)
+		Me.AuthorLinkLabel.Text = "ZeqMacaw"
+		Me.AuthorLinkLabel.Links.Add(0, Me.AuthorLinkLabel.Text.Length(), My.Resources.About_AuthorLink)
 
 		Me.GotoSteamProfileLinkLabel.Text = My.Resources.About_GotoSteamProfileText
 		Me.GotoSteamProfileLinkLabel.Links.Add(0, My.Resources.About_GotoSteamProfileText.Length(), My.Resources.About_AuthorLink)
